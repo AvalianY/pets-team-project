@@ -6,9 +6,6 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const loader = document.querySelector('.stories-loader');
-// const pagination = document.querySelector('.swiper-pagination');
-const prevBtn = document.querySelector('.swiper-button-prev');
-const nextBtn = document.querySelector('.swiper-button-next');
 const controls = document.querySelector('.swiper-controls');
 
 export function showError(error) {
@@ -38,14 +35,22 @@ function showControls() {
   controls.classList.remove('visually-hidden');
 }
 
-hideControls();
-showLoader();
-
 window.addEventListener('DOMContentLoaded', async () => {
   try {
     let storiesList = await getStories();
 
-    if (!storiesList || storiesList.length === 0) {
+    if (storiesList === null) {
+      showError('Не вдалося завантажити історії. Спробуйте пізніше');
+      hideLoader();
+      const wrapper = document.querySelector('.swiper-wrapper');
+      if (wrapper) {
+        wrapper.innerHTML =
+          '<p class="error-swiper">Не вдалося завантажити історії</p>';
+      }
+      return;
+    }
+
+    if (storiesList.length === 0) {
       showError('Нажаль, історії зараз недоступні');
       hideLoader();
       const wrapper = document.querySelector('.swiper-wrapper');
@@ -67,7 +72,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
-        // dynamicBullets: true,
+        dynamicBullets: false,
       },
 
       navigation: {
@@ -85,7 +90,6 @@ window.addEventListener('DOMContentLoaded', async () => {
     showControls();
     hideLoader();
   } catch (err) {
-    console.error('Error in stories:', err);
     showError('Cталась помилка. Спробуйте пізніше');
     const wrapper = document.querySelector('.swiper-wrapper');
     if (wrapper) {

@@ -5,7 +5,7 @@ const fetchStories = axios.create({
   baseURL: 'https://paw-hut.b.goit.study/api/',
   params: {
     page: 1,
-    limit: 8,
+    limit: 6,
   },
 });
 
@@ -14,7 +14,6 @@ export async function getStories() {
     const { data } = await fetchStories.get('/feedbacks');
     return data.feedbacks;
   } catch (error) {
-    showError('Щось пішло не так');
-    return [];
+    return null;
   }
 }
