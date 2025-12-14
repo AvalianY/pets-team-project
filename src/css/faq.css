@@ -42,10 +42,6 @@
     flex-shrink: 0;
 }
 
-.ac-panel {
-    padding-top: 16px;
-}
-
 .faq-answer {
     font-size: 14px;
     line-height: 1.6;
@@ -84,11 +80,8 @@
     display: flex !important;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
     padding: 20px 24px !important;
     background: transparent;
-    border: none;
-    text-align: left;
 }
 
 .ac {
@@ -98,6 +91,14 @@
 @media screen and (min-width: 768px) {
     .faq-title {
         margin-bottom: 80px;
+    }
+
+    .faq-item {
+        max-width: 704px;
+    }
+
+    .faq-list {
+        align-items: center;
     }
 }
 
@@ -124,9 +125,5 @@
 
     .faq-item {
         max-width: 864px;
-    }
-
-    .faq-list {
-        align-items: center;
     }
 }
