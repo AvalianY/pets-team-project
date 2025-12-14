@@ -1,6 +1,4 @@
 .faq-section {
-    margin: 0 auto;
-    align-items: center;
     padding: 64px 0;
 }
 
@@ -14,36 +12,121 @@
     margin-bottom: 40px;
 }
 
-.faq-p {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-.faq-btn {
-    width: 24px;
-    height: 24px;
-    
-    align-items: center;
-    
-    border: none;
-    background-color: var(--scheme1-foreground);
-}
-
-.container-faq {
+.faq-list {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.container-faq-item {
-    display: flex;
-    align-items: center;
-    background-color: var(--scheme1-foreground);
-    border: 0px solid var(--scheme1-border);
+.faq-item {
+    background-color: var(--scheme1-foreground) !important;
     border-radius: 8px;
-    max-width: 335px;
-    margin: 0 auto;
-    padding: 20px 24px;
+    padding: 0;
+}
+
+.faq-trigger {
     gap: 24px;
+}
+
+.faq-question {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--scheme1-text);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.5;
+    flex: 1;
+}
+
+.faq-icon {
+    fill: #02060a;
+    flex-shrink: 0;
+}
+
+.ac-panel {
+    padding-top: 16px;
+}
+
+.faq-answer {
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 0 24px 24px 24px;
+}
+
+.faq-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+    padding-left: 18px;
+}
+
+.faq-steps-ul {
+    list-style-type: disc;
+}
+
+.icon-close {
+    display: none;
+}
+
+.ac.is-active .icon-add {
+    display: none;
+}
+
+.ac.is-active .icon-close {
+    display: inline;
+}
+
+.ac-trigger::after {
+    display: none !important;
+}
+
+.ac-trigger.faq-trigger {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 24px !important;
+    background: transparent;
+    border: none;
+    text-align: left;
+}
+
+.ac {
+    margin: 0 !important;
+}
+
+@media screen and (min-width: 768px) {
+    .faq-title {
+        margin-bottom: 80px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .faq-section {
+        padding: 80px 0;
+    }
+    
+    .faq-title {
+        font-size: 48px;
+    }
+
+    .faq-question {
+        font-size: 18px;
+    }
+
+    .faq-steps {
+        font-size: 16px;
+    }
+
+    .faq-p {
+        font-size: 16px;
+    }
+
+    .faq-item {
+        max-width: 864px;
+    }
+
+    .faq-list {
+        align-items: center;
+    }
 }
