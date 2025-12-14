@@ -103,7 +103,15 @@
     padding-bottom: 64px;
   }
 
+  .footer-nav-link {
+    font-size: 14px;
+  }
+
   .horizontal-line {
     max-width: 1312px;
+  }
+
+  .footer-copyright {
+    font-size: 14px;
   }
 }
