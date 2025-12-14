@@ -1,0 +1,150 @@
+.success-stories-section {
+  padding: 64px 0;
+}
+
+.success-stories-title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  max-width: 335px;
+  margin: 0 auto 24px auto;
+}
+
+.success-stories-text {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: #02060a;
+  max-width: 335px;
+  margin: 0 auto 40px auto;
+}
+
+.stars-list {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 32px;
+}
+
+.star {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper {
+  width: 100%;
+  /* margin-bottom: 40px; */
+}
+
+.storie-text {
+  font-size: 18px;
+  margin-bottom: 32px;
+}
+
+.storie-names {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+#swiper-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  --swiper-navigation-size: 0px;
+  margin-top: 40px;
+}
+
+#swiper-pagination {
+  position: static;
+  text-align: start;
+  justify-content: flex-start;
+  --swiper-theme-color: var(--scheme1-text);
+}
+
+#swiper-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#swiper-button-prev,
+#swiper-button-next {
+  position: static;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--scheme1-accent);
+  border-radius: 8px;
+  padding: 12px;
+  background-color: var(--scheme1-foreground);
+  transition: all 0.3s ease;
+}
+
+
+
+#swiper-button-prev:focus-visible,
+#swiper-button-next:focus-visible {
+  transform: translateY(2px);
+  background-color: var(--scheme2-background);
+}
+
+#swiper-button-prev:active,
+#swiper-button-next:active {
+  transform: translateY(2px);
+  background-color: var(--scheme2-background);
+  box-shadow: var(--button-shadow);
+}
+
+.arrow-icon {
+  color: var(--scheme1-text);
+}
+
+.error-swiper {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--neutral);
+  max-width: 335px;
+  margin: 0 auto 40px auto;
+}
+
+.hide {
+  display: none;
+}
+
+.stories-loader {
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .success-stories-title {
+    max-width: 704px;
+  }
+
+  .success-stories-text {
+    max-width: 704px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .success-stories-title {
+      max-width: 378px;
+    }
+  #swiper-button-prev:hover,
+  #swiper-button-next:hover {
+    /* transform: translateY(2px); */
+    background-color: var(--scheme2-background);
+  }
+  .success-stories-section {
+    padding: 80px 0;
+  }
+}
