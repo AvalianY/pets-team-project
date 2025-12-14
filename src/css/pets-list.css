@@ -1,0 +1,135 @@
+.pets-list-section .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-pets-title {
+    font-family: var(--second-family);
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-top: 64px;
+}
+
+.section-pets-p {
+    font-size: 16px;
+    margin-top: 16px;
+}
+
+.pets-category-list {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 320px;
+}
+
+.pet-category-button{
+    border-radius: 100px;
+    padding: 10px 16px;
+    font-size: 14px;
+    border: none;
+    background-color: var(--scheme1-background);
+}
+
+.pets-list {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.pet-list-item {
+    border-radius: 16px;
+    padding: 12px;
+    background-color: var(--scheme1-foreground);
+}
+
+.pet-item-link {
+
+}
+
+.pet-image {
+    border-radius: 8px;
+    width: 100%;
+    height: 245px;
+    object-fit: cover;
+}
+
+.info-container {
+    margin-top: 16px;
+}
+
+.pet-info.name {
+    margin-top: 4px;
+    font-family: var(--second-family);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    letter-spacing: -0.01em;
+}
+
+.pet-info.category {
+    margin-top: 4px;
+    margin-right: 4px;
+}
+
+.pet-info.category .category {
+    margin-top: 4px;
+    margin-right: 4px;
+    border: 1px solid var(--transparent);
+    border-radius: 100px;
+    padding: 4px 10px;
+    background: var(--neutral-darkest-5);
+    padding-top: 4px;
+    font-weight: 600;
+    font-size: 10px;
+    color: var(--neutral-darkest);
+}
+.pet-info.age-gender {
+    font-size: 10px;
+    margin-top: 14px;
+}
+
+.pet-info.age-gender .age {
+    margin-right: 16px;
+}
+
+.pet-info.behavior {
+    margin: 16px 0;
+}
+
+.pets-list-section .button-container {
+    border: 1px solid var(--neutral-darkest);
+    border-radius: 8px;
+    padding: 8px 20px;
+    text-align: center;
+}
+
+.more-pet-info {
+    font-size: 14px;
+    color: var(--color-neutral-darkest);
+}
+
+.more-pets-button{
+    font-size: 14px;
+    color: var(--scheme2-text);
+    border: 1px solid var(--scheme2-foreground);
+    background: var(--scheme2-foreground);
+    border-radius: 8px;
+    padding: 12px 24px;
+    min-width: 320px;
+    max-width: 335px;
+    height: 45px;
+    margin-top: 40px;
+    margin-bottom: 32px;
+}
+
+.is-deactive {
+    font-weight: 500;
+    pointer-events: none;
+    cursor: default;
+    border: 1px solid var(--transparent);
+    background: var(--scheme1-foreground);
+}
