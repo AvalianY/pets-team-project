@@ -1,5 +1,50 @@
 <header class="header">
-  <div class="container">
-    <h1>Header</h1>
+  <div class="container header-elements">
+    <div class="header-wrap">
+      <a href="./index.html" class="header-logo"
+        ><svg class="header-icon" width="52.61" height="51.73">
+          <use href="./img/icons.svg#icon-logo"></use>
+        </svg>
+      </a>
+      <svg class="icon-text" width="96.65" height="37.37">
+        <use href="./img/icons.svg#icon-text"></use>
+      </svg>
+    </div>
+    <nav class="header-nav">
+      <a href="#" class="header-link">Знайти друга</a>
+      <a href="#" class="header-link">Про нас</a>
+      <a href="#" class="header-link">Часті запитання</a>
+      <a href="#" class="header-link">Історії успіху</a>
+    </nav>
+    <button type="button" class="header-btn-hidden header-btn">
+      Взяти друга
+    </button>
+    <div class="header-toggle">
+      <div class="header-burger">
+        <svg width="24" height="24">
+          <use href="./img/icons.svg#icon-menu"></use>
+        </svg>
+      </div>
+
+      <div class="header-close">
+        <svg width="24" height="24">
+          <use href="./img/icons.svg#icon-close"></use>
+        </svg>
+      </div>
+    </div>
   </div>
 </header>
+
+<div class="header-mob-menu">
+  <div class="container header-mob-menu-container">
+    <nav class="mobile-menu">
+      <a href="#" class="header-link">Знайти друга</a>
+      <a href="#" class="header-link">Про нас</a>
+      <a href="#" class="header-link">Часті запитання</a>
+      <a href="#" class="header-link">Історії успіху</a>
+    </nav>
+    <button type="button" class="header-btn">Взяти друга</button>
+  </div>
+</div>
+
+<script src="./js/header.js"></script>
