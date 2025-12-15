@@ -1,44 +1,32 @@
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
-
 const petsCategoryList = document.querySelector(".pets-category-list");
 const petsList = document.querySelector(".pets-list");
 const loader = document.querySelector(".loader");
-const morePetsButton = document.querySelector('.more-pets-button');
+export const morePetsButton = document.querySelector('.more-pets-button');
 
-const lightbox = new SimpleLightbox('.pets-list a', {
-    captionsData: "alt",
-    captionDelay: 250,
-    });
 
-export function createPetsList(images) {
+export function createPetsList(pets) {
     
-    const petsListContent = images.map(img => 
+    const petsListContent = pets.map(pet => 
         `<li class="pet-list-item">
-            <a class="pet-item-link" href="${img.image}">
-                <img 
-                class="pet-image" 
-                src="${img.image}" 
-                alt="${img.shortDescription}" 
-                />
-            </a>
+            <div class="pet-item-link">
+                <img class="pet-image" src="${pet.image}" alt="${pet.shortDescription}"/>
+            </div>
             <div class="info-container">
-                <p class="pet-info species">${img.species}</p>
-                <p class="pet-info name">${img.name}</p>
-                <p class="pet-info category">${
-                   img.categories.map(cat => `<span class="category">${cat.name}</span>`).join(' ')}
-                </p>
-                <p class="pet-info age-gender"><span class="age">${img.age}</span class="gender"><span>${img.gender}</span></p>
-                <p class="pet-info behavior">${img.behavior} ${img.shortDescription}</p>
+                <p class="pet-info species">${pet.species}</p>
+                <p class="pet-info name">${pet.name}</p>
+                <div class="pet-info category">${
+                   pet.categories.map(cat => `<span class="category">${cat.name}</span>`).join(' ')}
+                </div>
+                <p class="pet-info age-gender"><span class="age">${pet.age}</span class="gender"><span>${pet.gender}</span></p>
+                <p class="pet-info behavior">${pet.behavior} ${pet.shortDescription}</p>
             </div>
             <div class="button-container animated-button ligth">
-                <a class="more-pet-info" data-id="${img._id}">Дізнатись більше</a>
+                <a class="more-pet-info" data-id="${pet._id}">Дізнатись більше</a>
             </div>
         </li>`
     ).join('');
 
     petsList.insertAdjacentHTML("beforeend", petsListContent);
-    lightbox.refresh();
 }
 
 export function clearPetsList() {
@@ -97,7 +85,9 @@ export function createCategoryList(categories) {
     const categoriesListContent = sortedCategories
         .map(cat => `
             <li class="category-list-item">
-                <button class="pet-category-button animated-button dark" type="button">
+                <button class="pet-category-button animated-button dark"
+                    type="button"
+                    data-category-id="${cat._id}">
                     ${cat.name}
                 </button>
             </li>

@@ -9,34 +9,34 @@ import {
   hideLoader,
   showMorePetsButton,
   hideMorePetsButton,
-  scrollPetsList
+  scrollPetsList,
+  morePetsButton
 } from "./pets-list-render.js";
 
 let page = 1;
-let userQuery = '';
-const morePetsButton = document.querySelector('.more-pets-button');
-let imgObjArray = [];
+let categoryId = '';
+let petsObjArray = [];
+const petsList = document.querySelector('.pets-list');
+const animalDetailsModal = document.querySelector('.animal-details-modal');;
+const petsCategoryList = document.querySelector('.pets-category-list');
 const firstCategoryButton = document.querySelector('.pet-category-button.all');
 firstCategoryButton.classList.add('is-deactive');
-const petsCategoryList = document.querySelector('.pets-category-list');
 
 getCategoryByQueryMaker();
-getImagesByQueryMaker(userQuery, page);
+getImagesByQueryMaker(categoryId, page);
 
 petsCategoryList.addEventListener('click', e => {
     const button = e.target.closest('.pet-category-button');
     if (!button) return;
-
-    // знайти попередню deactive
     const deactiveButton = petsCategoryList.querySelector('.pet-category-button.is-deactive');
-
-    // якщо була — прибрати клас
-    if (deactiveButton) {
-        deactiveButton.classList.remove('is-deactive');
-    }
-
-    // натиснуту зробити deactive
+    if (deactiveButton) deactiveButton.classList.remove('is-deactive');
     button.classList.add('is-deactive');
+    categoryId = button.dataset.categoryId || '';
+    page = 1;
+    hideMorePetsButton();
+    clearPetsList();
+    showLoader();
+    getImagesByQueryMaker(categoryId, page);
 });
 
 if (morePetsButton) {
@@ -45,53 +45,62 @@ if (morePetsButton) {
     hideMorePetsButton();
     showLoader();
     page++;
-    getImagesByQueryMaker(userQuery, page);
+    getImagesByQueryMaker(categoryId, page);
   });
 }
 
+petsList?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.more-pet-info');
+    if (!btn) return;
+    e.preventDefault();
 
+    const petId = btn.dataset.id;
+
+    window.dispatchEvent(new CustomEvent('open-animal-modal', {
+        detail: { petId }
+    }));
+});
 
 /* Функції */
 
 /* Картки */
-async function getImagesByQueryMaker(userQuery, page) {
-  try {
-    const data = await getImagesByQuery(userQuery, page);
+async function getImagesByQueryMaker(categoryId, page) {
+    try {
+        hideMorePetsButton();
+        const data = await getImagesByQuery(categoryId, page);
 
-    if (data.animals.length === 0) {
-      iziToast.info({
-        message: "No animals found",
-        position: "topRight",
-      });
-      clearPetsList();
-      hideMorePetsButton();
-      return;
-    }
+        if (data.animals.length === 0) {
+        iziToast.info({
+            message: 'Тварин не знайдено за обраним фільтром.',
+            position: 'topRight',
+        });
+        clearPetsList();
+        hideMorePetsButton();
+        return;
+        }
 
-    imgObjArray = data.animals;
-    createPetsList(imgObjArray);
+        petsObjArray = data.animals;
+        setPets(petsObjArray); 
+        createPetsList(petsObjArray);
 
-    if (page > 1) scrollPetsList();
+        if (page > 1) scrollPetsList();
 
-    const totalPages = Math.ceil(data.totalItems / data.limit);
+        const totalPages = Math.ceil(data.totalItems / data.limit);
 
-    if (page >= totalPages) {
-      hideMorePetsButton();
-      iziToast.info({
-        message: "You've reached the end",
-      });
-    } else {
-      showMorePetsButton();
-    }
+        if (page >= totalPages) {
+        hideMorePetsButton();
+        iziToast.info({
+            message: 'Ви переглянули всі доступні результати.'
+        });
+        } else {
+        showMorePetsButton();
+        }
 
-  } catch (error) {
-    iziToast.error({
-      message: error.message || error,
-      position: "topRight",
-    });
-  } finally {
-    hideLoader();
-  }
+    } catch (error) {
+        iziToast.error({
+        message: error?.message || 'Сталася помилка під час завантаження тварин.',
+        position: "topRight", });
+    } finally {hideLoader();}
 }
 
 /* Категорії */
@@ -102,20 +111,34 @@ async function getCategoryByQueryMaker() {
 
     if (!Array.isArray(data) || data.length === 0) {
       iziToast.info({
-        message: "No categories found",
+        message: 'Категорії не знайдено.',
         position: "topRight",
       });
       return;
     }
 
-    imgObjArray = data; 
-    createCategoryList(imgObjArray);
+    petsObjArray = data; 
+    createCategoryList(petsObjArray);
 
   } catch (error) {
     iziToast.error({
-      message: error.message || error,
+      message: error?.message || 'Сталася помилка під час завантаження категорій.',
       position: "topRight",
     });
   } finally {
   }
+}
+
+/* функції для передачі данних для модалки*/
+
+function setPets(data) {
+  petsObjArray = Array.isArray(data) ? data : [];
+}
+
+export function getPets() {
+  return petsObjArray;
+}
+
+export function getPetById(id) {
+  return petsObjArray.find(p => p._id === id);
 }

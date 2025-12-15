@@ -1,16 +1,17 @@
 import axios from 'axios';
 
-export async function getImagesByQuery(category = '', page = 1) {
-    const perPage = window.innerWidth < 768 ? 8 : 9;
-    const pageNumber = Number(page) || 1;
+export async function getImagesByQuery( categoryId, page = 1) {
+    const perPage = window.innerWidth < 1440 ? 8 : 9;
+    const pageNumber = Math.max(1, Number(page) || 1);
 
     const params = {
         page: pageNumber,
         limit: perPage,
+
     };
 
-    if (category.trim() !== '') {
-        params.name = category;
+    if (categoryId) {
+        params.categoryId = categoryId;
     }
 
     const response = await axios.get('https://paw-hut.b.goit.study/api/animals/', { params });
