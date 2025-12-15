@@ -65,6 +65,7 @@
   text-align: start;
   justify-content: flex-start;
   left: auto;
+  top: 4px;
   transform: none;
   --swiper-theme-color: var(--scheme1-text);
 }
