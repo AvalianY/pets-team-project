@@ -7,6 +7,7 @@
   justify-content: space-between;
   padding-top: 7.36px;
   padding-bottom: 9.26px;
+  margin: 0 auto;
 }
 
 .header-wrap {
@@ -82,7 +83,6 @@
   transition: transform 0.5s ease, opacity 0.4s ease;
   z-index: 900;
   display: flex;
-  flex-direction: column;
 }
 
 .header-mob-menu.mob-menu-open {
@@ -91,21 +91,23 @@
 }
 
 .header-mob-menu-container {
-  max-width: 335px;
-  max-height: 305px;
+  width: 375px;
+  margin: 0 auto;
+  padding: 16px 20px 80px;
   display: flex;
   flex-direction: column;
-  padding: 16px 20px 80px 20px;
-  flex-grow: 1;
+  box-sizing: border-box;
 }
 
 .mobile-menu {
+  width: 335px;
   display: flex;
   flex-direction: column;
   gap: 32px;
   padding-top: 24px;
-  padding-bottom: 64px;
 }
+
+/* ===== LINKS ===== */
 
 .header-link {
   position: relative;
@@ -142,6 +144,7 @@
 }
 
 /* ===== BUTTON ===== */
+
 .header-btn-hidden {
   display: none;
 }
@@ -151,14 +154,19 @@
   font-size: 13.7px;
   font-weight: 400;
   border-radius: 8px;
-  padding: 8px 128px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease,
     border-color 0.3s ease;
-
   background-color: #88765c;
   border: 1px solid #88765c;
   color: #fff;
+}
+
+.header-mob-menu .header-btn {
+  width: 335px;
+  height: 37px;
+  padding: 0;
+  margin-top: 64px;
 }
 
 .header-btn:hover,
@@ -180,27 +188,30 @@
   pointer-events: none;
 }
 
+/* ===== TABLET ===== */
+
 @media screen and (min-width: 768px) {
   .header-elements {
     width: 704px;
   }
 
   .header-mob-menu-container {
-    width: 704px;
-    max-height: 305px;
+    width: 768px;
+    padding: 16px 32px 32px;
     align-items: center;
-    padding: 16px 32px 32px 32px;
   }
 
   .mobile-menu {
+    width: 704px;
     align-items: center;
   }
 
   .header-btn {
     font-size: 14px;
-    padding: 8px 58.5px;
   }
 }
+
+/* ===== DESKTOP ===== */
 
 @media screen and (min-width: 1440px) {
   .header-elements {
@@ -228,8 +239,8 @@
   .header-btn {
     width: 130px;
     height: 40px;
-    font-size: 15px;
     padding: 8px 20px;
+    font-size: 15px;
   }
 
   .header-toggle {
