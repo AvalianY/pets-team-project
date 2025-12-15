@@ -11,7 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
     <title>Хатинка Лапок</title>
     <script type="module" crossorigin src="/pets-team-project/index.js"></script>
-    <link rel="stylesheet" crossorigin href="/pets-team-project/assets/index-Dmj4RRDe.css">
+    <link rel="modulepreload" crossorigin href="/pets-team-project/assets/vendor-CZz_1llp.js">
+    <link rel="stylesheet" crossorigin href="/pets-team-project/assets/vendor-D_nxXpU-.css">
+    <link rel="stylesheet" crossorigin href="/pets-team-project/assets/index-BeLPo2v5.css">
   </head>
   <body>
     <header class="header">
@@ -29,7 +31,16 @@
 </section>
       <section class="pets-list-section" id="pets-list">
     <div class="container">
-        <h1>Pets List</h1>
+        <h2 class="section-pets-title">Наші хвостики</h2>
+        <p class="section-pets-p">Вони дуже чекають на знайомство з вами</p>
+        <ul class="pets-category-list">
+            <li class="category-list-item">
+                <button class="pet-category-button all animated-button dark" type="button">Всі</button>
+            </li>
+        </ul>
+        <ul class="pets-list"></ul>
+        <button class="more-pets-button animated-button dark" type="button">Показати більше</button>
+        <span class="loader"></span>
     </div>
 </section>
       <section class="about-us-section" id="about-us">
@@ -66,6 +77,6 @@
         <h1>Order Modal</h1>
     </div>
 </div>
-
+    
   </body>
 </html>
