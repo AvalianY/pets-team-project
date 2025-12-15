@@ -5,6 +5,7 @@
   padding-top: 48px;
   padding-bottom: 48px;
   margin: 0 auto;
+  min-width: 100%;
 }
 
 .footer-container {
