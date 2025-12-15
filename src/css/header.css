@@ -206,6 +206,9 @@
     align-items: center;
   }
 
+  .header-mob-menu .header-btn {
+    width: 196px;
+  }
   .header-btn {
     font-size: 14px;
   }
@@ -244,10 +247,6 @@
   }
 
   .header-toggle {
-    display: none;
-  }
-
-  .header-mob-menu {
     display: none;
   }
 }
