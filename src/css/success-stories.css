@@ -146,11 +146,21 @@
   }
 
   .success-stories-title {
-      max-width: 378px;
+      max-width: 640px;
+      font-size: 48px;
     }
   
     .success-stories-text {
       max-width: 640px;
+      font-size: 18px;
+    }
+
+    .storie-text {
+      font-size: 20px;
+    }
+
+    .storie-names {
+      font-size: 16px;
     }
   
   #swiper-button-prev:hover,
