@@ -8,12 +8,14 @@
     url('../img/hero/hero-mobile-1x.webp') 1x,
     url('../img/hero/hero-mobile-2x.webp') 2x
   );
+  margin: 0;
 }
 
 .hero-container {
   width: auto;
   margin: 0 auto;
   padding: 0 20px;
+  min-width: 0;
 }
 
 .hero-title {
