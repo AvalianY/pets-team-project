@@ -1,4 +1,5 @@
 .hero-section {
+  width: 100%;
   padding-top: 64px;
   padding-bottom: 115px;
   background: center / cover no-repeat;
@@ -10,14 +11,14 @@
 }
 
 .hero-container {
-  max-width: 375px;
+  width: auto;
   margin: 0 auto;
   padding: 0 20px;
 }
 
 .hero-title {
   font-family: 'Open Sans', sans-serif;
-  max-width: 335px;
+  max-width: none;
   font-weight: 700;
   font-size: 40px;
   line-height: 120%;
@@ -27,7 +28,7 @@
 }
 
 .hero-title-description {
-  max-width: 335px;
+  max-width: none;
   font-size: 16px;
   color: #fff;
   margin-bottom: 32px;
