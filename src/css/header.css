@@ -11,16 +11,12 @@
 }
 
 .header-wrap {
-  width: 159.5px;
   display: flex;
   align-items: center;
-  gap: 8.34px;
-  margin-right: auto;
 }
 
 .header-logo {
-  width: 52.61px;
-  height: 51.73px;
+  height: 51px;
 }
 
 .header-nav {
