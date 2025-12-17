@@ -7,8 +7,12 @@ import 'swiper/css';
 let aboutUsSwiper = null;
 
 function updateNavigationState(swiper) {
-  const prevBtn = swiper.params.navigation.prevEl;
-  const nextBtn = swiper.params.navigation.nextEl;
+  const prevBtn = Array.isArray(swiper.navigation?.prevEl)
+    ? swiper.navigation.prevEl[0]
+    : swiper.navigation?.prevEl;
+  const nextBtn = Array.isArray(swiper.navigation?.nextEl)
+    ? swiper.navigation.nextEl[0]
+    : swiper.navigation?.nextEl;
 
   if (prevBtn && nextBtn) {
     prevBtn.disabled = swiper.isBeginning;
@@ -17,18 +21,22 @@ function updateNavigationState(swiper) {
 }
 
 function initAboutUsSwiper() {
-  const container = document.querySelector('.about-us-section .swiper');
+  const container = document.querySelector(
+    '.about-us-section .about-us-swiper'
+  );
   if (!container) return null;
 
   const swiper = new Swiper(container, {
     modules: [Navigation, Pagination],
     loop: false,
+    wrapperClass: 'about-us-swiper-wrapper',
+    slideClass: 'about-us-swiper-slide',
     navigation: {
-      nextEl: '.swiper-controls .swiper-button-next',
-      prevEl: '.swiper-controls .swiper-button-prev',
+      nextEl: '.about-us-swiper-controls .about-us-swiper-button-next',
+      prevEl: '.about-us-swiper-controls .about-us-swiper-button-prev',
     },
     pagination: {
-      el: '.swiper-controls .swiper-pagination',
+      el: '.about-us-swiper-controls .about-us-swiper-pagination',
       clickable: true,
     },
     slidesPerView: 1,
@@ -63,4 +71,3 @@ if (document.readyState === 'loading') {
 }
 
 export default aboutUsSwiper;
-
