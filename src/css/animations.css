@@ -95,3 +95,7 @@
   background-color: var(--scheme2-background);
   box-shadow: var(--button-shadow);
 }
+
+.animated-nav-button:hover {
+  border: 1px solid rgba(2, 6, 10, 0.6);
+}
