@@ -82,26 +82,8 @@
   position: static;
   width: 48px;
   height: 48px;
-  border: 1px solid var(--scheme1-accent);
   border-radius: 8px;
   padding: 12px;
-  background-color: var(--scheme1-foreground);
-  transition: all 0.3s ease;
-}
-
-
-
-#swiper-button-prev:focus-visible,
-#swiper-button-next:focus-visible {
-  transform: translateY(2px);
-  background-color: var(--scheme2-background);
-}
-
-#swiper-button-prev:active,
-#swiper-button-next:active {
-  transform: translateY(2px);
-  background-color: var(--scheme2-background);
-  box-shadow: var(--button-shadow);
 }
 
 .arrow-icon {
@@ -164,10 +146,6 @@
       font-size: 16px;
     }
   
-  #swiper-button-prev:hover,
-  #swiper-button-next:hover {
-    background-color: var(--scheme2-background);
-  }
   .success-stories-section {
     padding: 80px 0;
   }
