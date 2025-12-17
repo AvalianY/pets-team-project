@@ -1,5 +1,47 @@
-<div class="animal-details-modal">
-    <div class="container">
-        <h1>Animal Details Modal</h1>
+<div class="animal-details-modal visually-hidden">
+  <div class="modal">
+    <div class="icon">
+      <svg class="close" width="32" height="32">
+        <use href="img/icons.svg#icon-close"></use>
+      </svg>
     </div>
+    <div class="content">
+      <div class="pet-image">
+        <img class="placeholder-image" src="" />
+      </div>
+      <div class="pet-description-wrapper">
+        <div class="pet-description">
+          <div class="pet-info-header">
+            <p id="pet-type" class="pet-type"></p>
+            <h1 id="pet-name" class="pet-name"></h1>
+            <div class="gender-age-wrapper">
+              <p id="age" class="gender-age-text"></p>
+              <p id="gender" class="gender-age-text"></p>
+            </div>
+          </div>
+          <div class="description-wrapper">
+            <ul class="description-list">
+              <li class="description-item">
+                <h3 class="description-header">Опис:</h3>
+                <p id="desc" class="description-text"></p>
+              </li>
+              <li class="description-item">
+                <h3 class="description-header">Здоров’я:</h3>
+                <p id="health" class="description-text"></p>
+              </li>
+              <li class="description-item">
+                <h3 class="description-header-bold">Поведінка:</h3>
+                <p id="behaviour" class="description-text"></p>
+              </li>
+            </ul>
+            <div class="button-container">
+              <button class="button">
+                Взяти додому
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
