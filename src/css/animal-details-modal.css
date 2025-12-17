@@ -12,6 +12,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
+  align-items: flex-start;
   opacity: 1;
   visibility: visible;
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -34,12 +36,14 @@
   padding: 64px 20px;
   width: 100%;
   max-width: 335px;
-  max-height: 100%;
-  overflow-y: auto;
+  height: auto;
+  overflow-y: hidden;
   position: relative;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  margin: auto;
 }
 
 /* Hide scrollbar for Chrome/Safari/Opera */
@@ -178,7 +182,6 @@
 
 .animal-details-modal .button {
   border: 1px solid transparent;
-  background: transparent;
   padding: 0;
   width: 100%;
   cursor: pointer;
@@ -210,12 +213,17 @@
 ----------------------------------------------------------- */
 @media screen and (min-width: 768px) {
 
+  .animal-details-modal {
+    padding: 64px 32px;
+  }
+
   .animal-details-modal .modal {
     max-width: 704px;
     padding: 64px 32px;
     justify-content: center;
-    align-items: center;
-    max-height: 95vh;
+    align-items: stretch;
+    max-height: none;
+    height: auto;
   }
 
   .animal-details-modal .icon {
@@ -223,6 +231,7 @@
   }
 
   .animal-details-modal .content {
+    height: auto;
     flex-direction: row;
     align-items: flex-start;
   }
@@ -235,12 +244,11 @@
 
   .animal-details-modal .placeholder-image {
     height: 100%;
-    min-height: 330px;
   }
 
   .animal-details-modal .pet-description-wrapper {
     width: 304px;
-    padding-top: 20px;
+    padding-top: 0px;
   }
 
   .animal-details-modal .pet-name {
@@ -272,6 +280,9 @@
 ----------------------------------------------------------- */
 @media screen and (min-width: 1440px) {
 
+  .animal-details-modal {
+    padding: 64px;
+  }
   .animal-details-modal .modal {
     max-width: none;
     width: fit-content;
@@ -283,7 +294,7 @@
   }
 
   .animal-details-modal .placeholder-image {
-    min-height: 400px;
+    min-height: 450px;
   }
 
   .animal-details-modal .pet-description-wrapper {
@@ -305,6 +316,7 @@
   }
 
   .animal-details-modal .description-header,
+  .animal-details-modal .description-header-bold,
   .animal-details-modal .description-text {
     font-size: 16px;
   }
