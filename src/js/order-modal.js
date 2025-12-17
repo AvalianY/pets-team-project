@@ -33,7 +33,7 @@ function openModal() {
   document.body.style.overflow = 'hidden';
   refs.submitBtn.disabled = true;
   checkFormValidity();
-  window.addEventListener('keydown', onEscPress);
+  document.addEventListener('keydown', onEscPress);
 }
 
 function closeModal() {
@@ -41,7 +41,7 @@ function closeModal() {
   document.body.style.overflow = '';
   refs.form.reset();
   animalId = null;
-  window.removeEventListener('keydown', onEscPress);
+  document.removeEventListener('keydown', onEscPress);
 }
 
 refs.closeBtn.addEventListener('click', closeModal);
@@ -53,7 +53,7 @@ refs.overlay.addEventListener('click', event => {
 });
 
 function onEscPress(event) {
-  if (event.key === 'Escape') {
+  if (event.key === 'Escape' && refs.overlay.classList.contains('is-open')) {
     closeModal();
   }
 }
@@ -106,28 +106,28 @@ refs.form.addEventListener('submit', async event => {
 ========================= */
 
 function validateForm(name, phone, comment) {
+  let isValid = true;
+
+  clearFieldError(refs.nameInput);
+  clearFieldError(refs.phoneInput);
+  clearFieldError(refs.commentInput);
+
   if (!name || name.length > 32) {
-    iziToast.warning({
-      message: 'Імʼя обовʼязкове (до 32 символів)',
-      position: 'topRight',
-    });
-    return false;
+    setFieldError(refs.nameInput, 'Імʼя обовʼязкове (до 32 символів)');
+    isValid = false;
   }
 
   if (!phone || !/^[0-9]{12}$/.test(phone)) {
-    iziToast.warning({
-      message: 'Введіть коректний номер телефону',
-      position: 'topRight',
-    });
-    return false;
+    setFieldError(refs.phoneInput, 'Введіть коректний номер телефону');
+    isValid = false;
   }
 
   if (comment && comment.length > 500) {
-    iziToast.warning({
-      message: 'Коментар не може перевищувати 500 символів',
-      position: 'topRight',
-    });
-    return false;
+    setFieldError(
+      refs.commentInput,
+      'Коментар не може перевищувати 500 символів'
+    );
+    isValid = false;
   }
 
   if (!animalId) {
@@ -135,11 +135,51 @@ function validateForm(name, phone, comment) {
       message: 'Не обрано тварину',
       position: 'topRight',
     });
-    return false;
+    isValid = false;
   }
 
-  return true;
+  return isValid;
 }
+
+function setFieldError(field, message) {
+  field.classList.add('is-error');
+
+  const errorText = field
+    .closest('.order-container-area, .order-container-label')
+    ?.querySelector('.order-error-text');
+
+  if (errorText) {
+    errorText.textContent = message;
+    errorText.classList.add('is-visible');
+  }
+}
+
+function clearFieldError(field) {
+  field.classList.remove('is-error');
+
+  const errorText = field
+    .closest('.order-container-area, .order-container-label')
+    ?.querySelector('.order-error-text');
+
+  if (errorText) {
+    errorText.classList.remove('is-visible');
+    errorText.textContent = '';
+  }
+}
+
+refs.nameInput.addEventListener('input', () => {
+  clearFieldError(refs.nameInput);
+  checkFormValidity();
+});
+
+refs.phoneInput.addEventListener('input', () => {
+  clearFieldError(refs.phoneInput);
+  checkFormValidity();
+});
+
+refs.commentInput.addEventListener('input', () => {
+  clearFieldError(refs.commentInput);
+});
 
 /* =========================
    PHONE NORMALIZATION
@@ -166,19 +206,14 @@ function normalizePhone(value) {
    SUBMIT DISABLED
 ========================= */
 
-// === FORM INPUT EVENTS TO TOGGLE SUBMIT ===
-[refs.nameInput, refs.phoneInput].forEach(input => {
-  input.addEventListener('input', checkFormValidity);
-});
-
 function checkFormValidity() {
   const name = refs.nameInput.value.trim();
   const phone = normalizePhone(refs.phoneInput.value);
+  const comment = refs.commentInput.value.trim();
 
-  // Якщо всі обов'язкові поля заповнені та валідні — активуємо кнопку
-  if (name && name.length <= 32 && /^[0-9]{12}$/.test(phone)) {
-    refs.submitBtn.disabled = false;
-  } else {
-    refs.submitBtn.disabled = true;
-  }
+  const isNameValid = name && name.length <= 32;
+  const isPhoneValid = /^[0-9]{12}$/.test(phone);
+  const isCommentValid = comment.length <= 500;
+
+  refs.submitBtn.disabled = !(isNameValid && isPhoneValid && isCommentValid);
 }

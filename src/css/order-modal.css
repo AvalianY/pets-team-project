@@ -118,6 +118,27 @@
     transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* базово помилка прихована */
+.order-error-text {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #ae0000;
+    display: none;
+}
+
+/* error state для інпута */
+.order-input.is-error {
+    border-color: #ae0000;
+    color: #ae0000;
+}
+
+/* показ тексту помилки */
+.order-container-label.is-error .order-error-text,
+.order-container-area.is-error .order-error-text {
+    display: block;
+}
+
 .order-container-area {
     margin-bottom: 24px;
 }
@@ -137,6 +158,15 @@
     outline: transparent;
     resize: none;
     transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.order-textarea.is-error {
+    border-color: #ae0000;
+    color: #ae0000;
+}
+
+.order-error-text.is-visible {
+    display: block;
 }
 
 .btn-send {
