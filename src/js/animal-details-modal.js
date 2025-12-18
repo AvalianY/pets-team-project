@@ -17,12 +17,14 @@ let currentPetId = null;
 
 function openModal() {
   modal?.classList.remove('visually-hidden');
-  document.body.style.overflow = 'hidden';
+  document.body.classList.add('lock-scroll');
+  document.documentElement.classList.add('lock-scroll');
 }
 
 function closeModal() {
   modal?.classList.add('visually-hidden');
-  document.body.style.overflow = '';
+  document.body.classList.remove('lock-scroll');
+  document.documentElement.classList.remove('lock-scroll');
 
   if (modalImage) {
     modalImage.src = '';
@@ -42,7 +44,6 @@ function closeModal() {
 function openModalWithId(petId) {
   const pet = getPetById(petId);
   currentPetId = petId;
-  console.log(pet);
 
   if (!pet) {
     console.error('Pet not found:', petId);

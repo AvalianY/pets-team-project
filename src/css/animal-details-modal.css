@@ -14,6 +14,7 @@
   align-items: center;
   overflow-y: auto;
   align-items: flex-start;
+  overscroll-behavior: contain;
   opacity: 1;
   visibility: visible;
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -329,4 +330,9 @@
   .animal-details-modal .button {
     font-size: 16px;
   }
+}
+
+body.lock-scroll {
+  overflow: hidden !important;
+  height: 100vh !important;
 }
