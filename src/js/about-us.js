@@ -20,6 +20,8 @@ function updateNavigationState(swiper) {
   }
 }
 
+
+
 function initAboutUsSwiper() {
   const container = document.querySelector(
     '.about-us-section .about-us-swiper'
@@ -70,4 +72,3 @@ if (document.readyState === 'loading') {
   runInit();
 }
 
-export default aboutUsSwiper;
