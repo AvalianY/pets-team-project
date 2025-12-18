@@ -141,9 +141,9 @@ function validateForm(name, phone, comment) {
   clearFieldError(refs.phoneInput);
   clearFieldError(refs.commentInput);
 
-  if (!name || name.length > 32) {
-    setFieldError(refs.nameInput, 'Імʼя обовʼязкове (до 32 символів)');
-    isValid = false;
+  if (!name || name.length < 3 || name.length > 32) {
+  setFieldError(refs.nameInput, 'Імʼя має бути від 3 до 32 символів');
+  isValid = false;
   }
 
   if (!phone || !/^[0-9]{12}$/.test(phone)) {
@@ -197,17 +197,58 @@ function clearFieldError(field) {
 }
 
 refs.nameInput.addEventListener('input', () => {
+  let value = refs.nameInput.value.trim();
+
+  value = value.replace(/[^a-zA-Zа-яА-ЯіІїЇєЄґҐ\s-]/g, '');
+
+  refs.nameInput.value = value;
+
   clearFieldError(refs.nameInput);
+
+  if (value.length > 0 && value.length < 3) {
+    setFieldError(refs.nameInput, 'Мінімум 3 символи');
+  } else if (value.length > 32) {
+    setFieldError(refs.nameInput, 'Максимум 32 символи');
+  }
+
   checkFormValidity();
 });
 
 refs.phoneInput.addEventListener('input', () => {
+  let value = refs.phoneInput.value;
+
+  value = value.replace(/[^0-9+]/g, '');
+
+  if (value.includes('+')) {
+    value =
+      '+' +
+      value
+        .replace(/\+/g, '')
+        .replace(/^/, '');
+  }
+
+  refs.phoneInput.value = value;
+
+  const phone = normalizePhone(value);
+
   clearFieldError(refs.phoneInput);
+
+  if (phone && !/^[0-9]{12}$/.test(phone)) {
+    setFieldError(refs.phoneInput, 'Введіть коректний номер телефону');
+  }
+
   checkFormValidity();
 });
 
 refs.commentInput.addEventListener('input', () => {
+  const value = refs.commentInput.value.trim();
+
   clearFieldError(refs.commentInput);
+
+  if (value.length > 500) {
+    setFieldError(refs.commentInput, 'Максимум 500 символів');
+  }
+
   checkFormValidity();
 });
 
@@ -216,15 +257,12 @@ refs.commentInput.addEventListener('input', () => {
 ========================= */
 
 function normalizePhone(value) {
-  // залишаємо тільки цифри
   let digits = value.replace(/\D/g, '');
 
-  // якщо номер починається з 0 → додаємо код України
   if (digits.length === 10 && digits.startsWith('0')) {
     digits = '38' + digits;
   }
 
-  // якщо ввели +380...
   if (digits.length === 12 && digits.startsWith('380')) {
     return digits;
   }
@@ -241,7 +279,7 @@ function checkFormValidity() {
   const phone = normalizePhone(refs.phoneInput.value);
   const comment = refs.commentInput.value.trim();
 
-  const isNameValid = name && name.length <= 32;
+  const isNameValid = name.length >= 3 && name.length <= 32;
   const isPhoneValid = /^[0-9]{12}$/.test(phone);
   const isCommentValid = comment.length <= 500;
 
