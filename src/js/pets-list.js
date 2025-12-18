@@ -18,7 +18,7 @@ let categoryId = '';
 let petsObjArray = [];
 const petsList = document.querySelector('.pets-list');
 const petsCategoryList = document.querySelector('.pets-category-list');
-const firstCategoryButton = document.querySelector('.pet-category-button.all');
+const firstCategoryButton = document.querySelector('.pet-category-button.all'); 
 firstCategoryButton.classList.add('is-deactive');
 
 getCategoryByQueryMaker();
