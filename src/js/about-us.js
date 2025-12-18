@@ -63,11 +63,6 @@ function initAboutUsSwiper() {
 }
 
 function runInit() {
-  if (aboutUsSwiper) {
-      aboutUsSwiper.destroy(true, true);
-      aboutUsSwiper = null;
-    }
-
   aboutUsSwiper = initAboutUsSwiper();
 }
 
