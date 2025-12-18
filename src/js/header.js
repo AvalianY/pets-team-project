@@ -6,34 +6,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobMenu = document.querySelector('.header-mob-menu');
   const headerLinks = document.querySelectorAll('.header-link');
 
-  // mobile menu toggle
+  // Esc handler
+  const handleEscKey = e => {
+    if (e.key === 'Escape') {
+      closeMobileMenu();
+    }
+  };
+
+  // close mobile menu function
+  const closeMobileMenu = () => {
+    if (!mobMenu.classList.contains('mob-menu-open')) return;
+
+    mobMenu.classList.remove('mob-menu-open');
+    burger.classList.remove('is-hidden');
+    close.classList.remove('is-active');
+    document.body.style.overflow = '';
+
+    document.removeEventListener('keydown', handleEscKey);
+  };
+
+  // open mobile menu
   burger.addEventListener('click', () => {
     mobMenu.classList.add('mob-menu-open');
     burger.classList.add('is-hidden');
     close.classList.add('is-active');
     document.body.style.overflow = 'hidden';
+
+    document.addEventListener('keydown', handleEscKey);
   });
 
-  // close mobile menu function
-
-  const closeMobileMenu = () => {
-    mobMenu.classList.remove('mob-menu-open');
-    burger.classList.remove('is-hidden');
-    close.classList.remove('is-active');
-    document.body.style.overflow = '';
-  };
-
-  // close mobile menu event
+  // close button
   close.addEventListener('click', closeMobileMenu);
 
-  // close mobile menu on ESC key press
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && mobMenu.classList.contains('mob-menu-open')) {
-      closeMobileMenu();
-    }
-  });
-
-  // close mobile menu on clicking outside the menu container
+  // click outside to close
   mobMenu.addEventListener('click', e => {
     if (!e.target.closest('.header-mob-menu-container')) {
       closeMobileMenu();
@@ -45,45 +50,48 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', e => {
       const targetId = link.getAttribute('href');
 
-      if (targetId.startsWith('#') && targetId.length > 1) {
-        e.preventDefault();
+      if (!targetId || !targetId.startsWith('#')) return;
 
-        const targetSection = document.querySelector(targetId);
-        if (!targetSection) return;
+      const targetSection = document.querySelector(targetId);
+      if (!targetSection) return;
 
-        if (window.innerWidth < 1440) {
-          closeMobileMenu();
+      e.preventDefault();
 
-          setTimeout(() => {
-            targetSection.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start',
-            });
-          }, 300);
-        } else {
-          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+      if (window.innerWidth < 1440) {
+        closeMobileMenu();
+        setTimeout(() => {
+          targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        }, 300);
+      } else {
+        targetSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
       }
     });
   });
 
-  // Smooth scroll for buttons with data-scroll attribute
+  // smooth scroll for buttons with data-scroll
   const scrollButtons = document.querySelectorAll('.header-btn[data-scroll]');
   scrollButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.dataset.scroll;
       const targetSection = document.querySelector(targetId);
-      if (targetSection) {
-        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (!targetSection) return;
 
-      if (mobMenu.classList.contains('mob-menu-open')) {
-        closeMobileMenu();
-      }
+      targetSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+
+      closeMobileMenu();
     });
   });
 
-  // Close menu on resize =====
+  // close mobile menu on resize
   window.addEventListener('resize', () => {
     if (window.innerWidth >= 1440) {
       closeMobileMenu();
