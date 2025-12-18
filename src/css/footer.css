@@ -56,10 +56,6 @@
   pointer-events: auto;
 }
 
-.footer-nav-link:hover,
-.footer-nav-link:focus-visible {
-  transform: scale(1.1);
-}
 
 .footer-nav-link::after {
   content: '';
