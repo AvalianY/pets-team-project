@@ -63,6 +63,11 @@ function initAboutUsSwiper() {
 }
 
 function runInit() {
+  if (aboutUsSwiper) {
+      aboutUsSwiper.destroy(true, true);
+      aboutUsSwiper = null;
+    }
+
   aboutUsSwiper = initAboutUsSwiper();
 }
 
@@ -71,8 +76,3 @@ if (document.readyState === 'loading') {
 } else {
   runInit();
 }
-
-if (aboutUsSwiper) {
-      aboutUsSwiper.destroy(true, true);
-      aboutUsSwiper = null;
-    }
