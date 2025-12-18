@@ -4,7 +4,9 @@ const modal = document.querySelector('.animal-details-modal');
 const closeBtn = modal?.querySelector('.icon');
 const adoptBtn = modal?.querySelector('.button');
 
-const modalImage = modal?.querySelector('.placeholder-image');
+const petImageContainer = modal?.querySelector('.pet-image');
+
+let modalImage = null;
 const petNameEl = document.getElementById('pet-name');
 const petTypeEl = document.getElementById('pet-type');
 const ageEl = document.getElementById('age');
@@ -12,6 +14,17 @@ const genderEl = document.getElementById('gender');
 const descEl = document.getElementById('desc');
 const healthEl = document.getElementById('health');
 const behaviourEl = document.getElementById('behaviour');
+
+function getModalImage() {
+  if (modalImage) return modalImage;
+  if (!petImageContainer) return null;
+
+  modalImage = document.createElement('img');
+  modalImage.classList.add('placeholder-image');
+  modalImage.alt = '';
+  petImageContainer.appendChild(modalImage);
+  return modalImage;
+}
 
 let currentPetId = null;
 
@@ -26,9 +39,10 @@ function closeModal() {
   document.body.classList.remove('lock-scroll');
   document.documentElement.classList.remove('lock-scroll');
 
-  if (modalImage) {
-    modalImage.src = '';
-    modalImage.alt = '';
+  const imageEl = getModalImage();
+  if (imageEl) {
+    imageEl.src = '';
+    imageEl.alt = '';
   }
   if (petNameEl) petNameEl.textContent = '';
   if (petTypeEl) petTypeEl.textContent = '';
@@ -46,16 +60,16 @@ function openModalWithId(petId) {
   currentPetId = petId;
 
   if (!pet) {
-  currentPetId = petId;
-  openModal();
-  return;
-}
+    openModal();
+    return;
+  }
 
+  const imageEl = getModalImage();
   const img = new Image();
   img.onload = () => {
-    if (modalImage) {
-      modalImage.src = pet.image || '';
-      modalImage.alt = pet.name || '';
+    if (imageEl) {
+      imageEl.src = pet.image || '';
+      imageEl.alt = pet.name || '';
     }
     if (petNameEl) petNameEl.textContent = pet.name || '';
     if (petTypeEl) petTypeEl.textContent = pet.species || '';
@@ -69,9 +83,9 @@ function openModalWithId(petId) {
   };
   img.onerror = () => {
     console.error('Failed to load image:', pet.image);
-    if (modalImage) {
-      modalImage.src = pet.image || '';
-      modalImage.alt = pet.name || '';
+    if (imageEl) {
+      imageEl.src = pet.image || '';
+      imageEl.alt = pet.name || '';
     }
     if (petNameEl) petNameEl.textContent = pet.name || '';
     if (petTypeEl) petTypeEl.textContent = pet.species || '';
@@ -89,23 +103,25 @@ function openModalWithId(petId) {
 adoptBtn?.addEventListener('click', () => {
   const petId = currentPetId;
   closeModal();
-  window.dispatchEvent(new CustomEvent('open-order-modal', { detail: { petId } }));
+  window.dispatchEvent(
+    new CustomEvent('open-order-modal', { detail: { petId } })
+  );
 });
 
 closeBtn?.addEventListener('click', closeModal);
 
-modal?.addEventListener('click', (e) => {
+modal?.addEventListener('click', e => {
   if (e.target === modal) {
     closeModal();
   }
 });
 
-document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !modal?.classList.contains('visually-hidden')) {
     closeModal();
   }
 });
 
-window.addEventListener('open-animal-modal', (e) => {
+window.addEventListener('open-animal-modal', e => {
   openModalWithId(e.detail.petId);
 });
