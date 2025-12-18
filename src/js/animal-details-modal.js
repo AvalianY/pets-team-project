@@ -45,9 +45,10 @@ function openModalWithId(petId) {
   console.log(pet);
 
   if (!pet) {
-    console.error('Pet not found:', petId);
-    return;
-  }
+  currentPetId = petId;
+  openModal();
+  return;
+}
 
   const img = new Image();
   img.onload = () => {
@@ -85,12 +86,9 @@ function openModalWithId(petId) {
 }
 
 adoptBtn?.addEventListener('click', () => {
-    closeModal();
-
-    const event = new CustomEvent('open-order-modal', {
-        detail: { petId: currentPetId }
-    });
-    window.dispatchEvent(event);
+  const petId = currentPetId;
+  closeModal();
+  window.dispatchEvent(new CustomEvent('open-order-modal', { detail: { petId } }));
 });
 
 closeBtn?.addEventListener('click', closeModal);
