@@ -128,7 +128,7 @@
     background: var(--scheme2-foreground);
     border-radius: 8px;
     padding: 12px 24px;
-    min-width: 320px;
+    width: 100%;
     max-width: 335px;
     height: 45px;
 }
