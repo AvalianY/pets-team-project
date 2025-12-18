@@ -2,7 +2,7 @@ import Raty from 'raty-js';
 import 'raty-js/src/raty.css';
 
 export function renderStories(stories) {
-  const swiperWrapper = document.querySelector('.swiper-wrapper');
+  const swiperWrapper = document.querySelector('.success-stories-section .swiper-wrapper');
 
   const markup = stories
     .map(
