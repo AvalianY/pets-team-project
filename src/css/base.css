@@ -70,6 +70,12 @@ main {
     }
 }
 
+section {
+  margin: 0 auto;
+  width: 100%;
+}
+
+
 .visually-hidden {
   position: absolute;
   width: 1px;
