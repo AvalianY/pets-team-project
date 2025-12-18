@@ -28,22 +28,37 @@
     <header class="header">
   <div class="container header-elements">
     <div class="header-wrap">
-      <a href="./index.html" class="header-logo"
+      <a
+        href="./index.html"
+        class="header-logo"
+        aria-label="Логотип посилання на головну сторінку"
         ><svg class="header-icon" width="157" height="51">
           <use href="/pets-team-project/assets/icons-64NDqf5V.svg#icon-logotype"></use>
         </svg>
       </a>
     </div>
     <nav class="header-nav">
-      <a href="#pets-list" class="header-link">Знайти друга</a>
-      <a href="#about-us" class="header-link">Про нас</a>
-      <a href="#faq" class="header-link">Часті запитання</a>
-      <a href="#success-stories" class="header-link">Історії успіху</a>
+      <a href="#pets-list" class="header-link" aria-label="Секція знайти друга"
+        >Знайти друга</a
+      >
+      <a href="#about-us" class="header-link" aria-label="Секція про нас"
+        >Про нас</a
+      >
+      <a href="#faq" class="header-link" aria-label="Секція часті запитання"
+        >Часті запитання</a
+      >
+      <a
+        href="#success-stories"
+        class="header-link"
+        aria-label="Секція історії успіху"
+        >Історії успіху</a
+      >
     </nav>
     <button
       type="button"
       class="header-btn-hidden header-btn"
       data-scroll="#pets-list"
+      aria-label="Взяти друга"
     >
       Взяти друга
     </button>
@@ -66,12 +81,28 @@
 <div class="header-mob-menu">
   <div class="header-mob-menu-container">
     <nav class="mobile-menu">
-      <a href="#pets-list" class="header-link">Знайти друга</a>
-      <a href="#about-us" class="header-link">Про нас</a>
-      <a href="#faq" class="header-link">Часті запитання</a>
-      <a href="#success-stories" class="header-link">Історії успіху</a>
+      <a href="#pets-list" class="header-link" aria-label="Секція знайти друга"
+        >Знайти друга</a
+      >
+      <a href="#about-us" class="header-link" aria-label="Секція про нас"
+        >Про нас</a
+      >
+      <a href="#faq" class="header-link" aria-label="Секція часті запитання"
+        >Часті запитання</a
+      >
+      <a
+        href="#success-stories"
+        class="header-link"
+        aria-label="Секція історії успіху"
+        >Історії успіху</a
+      >
     </nav>
-    <button type="button" class="header-btn" data-scroll="#pets-list">
+    <button
+      type="button"
+      class="header-btn"
+      data-scroll="#pets-list"
+      aria-label="Взяти друга"
+    >
       Взяти друга
     </button>
   </div>
@@ -80,28 +111,52 @@
 
     <main>
       <section class="hero-section" id="hero">
-    <div class="container hero-container">
-        <h1 class="hero-title">Кожне життя має значення. Знайди свого вірного друга</h1>
-        <p class="hero-title-description">Сотні котиків та собачок у притулку Хатинка Лапок чекають на свою родину.
-            Подаруйте їм дім.</p>
-        <a href="#success-stories" class="hero-btn" id="scrollToStories">
-            Подивитись історії</a>
-    </div>
+  <div class="container hero-container">
+    <h1 class="hero-title">
+      Кожне життя має значення. Знайди свого вірного друга
+    </h1>
+    <p class="hero-title-description">
+      Сотні котиків та собачок у притулку Хатинка Лапок чекають на свою родину.
+      Подаруйте їм дім.
+    </p>
+    <a
+      href="#success-stories"
+      class="hero-btn"
+      id="scrollToStories"
+      aria-label="Секція історії успіху"
+    >
+      Подивитись історії</a
+    >
+  </div>
 </section>
+
       <section class="pets-list-section" id="pets-list">
-    <div class="container">
-        <h2 class="section-pets-title">Наші хвостики</h2>
-        <p class="section-pets-p">Вони дуже чекають на знайомство з вами</p>
-        <ul class="pets-category-list">
-            <li class="category-list-item">
-                <button class="pet-category-button all animated-button dark" type="button">Всі</button>
-            </li>
-        </ul>
-        <ul class="pets-list"></ul>
-        <button class="more-pets-button animated-button dark" type="button">Показати більше</button>
-        <span class="loader"></span>
-    </div>
+  <div class="container">
+    <h2 class="section-pets-title">Наші хвостики</h2>
+    <p class="section-pets-p">Вони дуже чекають на знайомство з вами</p>
+    <ul class="pets-category-list">
+      <li class="category-list-item">
+        <button
+          class="pet-category-button all animated-button dark"
+          type="button"
+          aria-label="Всі категорії тварин"
+        >
+          Всі
+        </button>
+      </li>
+    </ul>
+    <ul class="pets-list"></ul>
+    <button
+      class="more-pets-button animated-button dark"
+      type="button"
+      aria-label="Показати більше тварин"
+    >
+      Показати більше
+    </button>
+    <span class="loader"></span>
+  </div>
 </section>
+
       <section class="about-us-section" id="about-us">
   <div class="container">
     <h2>Чому Хатинка Лапок</h2>
@@ -258,7 +313,7 @@
         <div class="about-us-swiper-navigation">
           <button
             class="about-us-swiper-button-prev animated-nav-button"
-            aria-label="Previous slide"
+            aria-label="Попередній слайд історії"
           >
             <svg width="24" height="24" aria-hidden="true">
               <use href="/pets-team-project/assets/icons-64NDqf5V.svg#icon-arrow_back"></use>
@@ -266,7 +321,7 @@
           </button>
           <button
             class="about-us-swiper-button-next animated-nav-button"
-            aria-label="Next slide"
+            aria-label="Наступний слайд історії"
           >
             <svg width="24" height="24" aria-hidden="true">
               <use href="/pets-team-project/assets/icons-64NDqf5V.svg#icon-arrow_forward"></use>
@@ -285,7 +340,11 @@
     <div class="accordion faq-list" id="faq-accordion">
       <div class="ac faq-item">
         <h3 class="ac-header">
-          <button type="button" class="ac-trigger faq-trigger">
+          <button
+            type="button"
+            class="ac-trigger faq-trigger"
+            aria-label="Розгорнути питання"
+          >
             <span class="faq-question">
               Я мрію про пухнастика! Що мені потрібно зробити, щоб забрати
               хвостика додому?
@@ -335,7 +394,11 @@
       </div>
       <div class="ac faq-item">
         <h3 class="ac-header">
-          <button type="button" class="ac-trigger faq-trigger">
+          <button
+            type="button"
+            class="ac-trigger faq-trigger"
+            aria-label="Розгорнути питання"
+          >
             <span class="faq-question">
               Як мені найкраще підготувати свій дім та родину до появи хвостика?
             </span>
@@ -381,7 +444,11 @@
 
       <div class="ac faq-item">
         <h3 class="ac-header">
-          <button type="button" class="ac-trigger faq-trigger">
+          <button
+            type="button"
+            class="ac-trigger faq-trigger"
+            aria-label="Розгорнути питання"
+          >
             <span class="faq-question">
               Чи можу я бути впевненим, що тваринка здорова? Розкажіть про
               щеплення.
@@ -422,7 +489,11 @@
 
       <div class="ac faq-item">
         <h3 class="ac-header">
-          <button type="button" class="ac-trigger faq-trigger">
+          <button
+            type="button"
+            class="ac-trigger faq-trigger"
+            aria-label="Розгорнути питання"
+          >
             <span class="faq-question">
               Я дуже хочу допомогти, але поки не готовий до адопції. Чим я можу
               підтримати «Хатинку лапок»?
@@ -469,7 +540,11 @@
 
       <div class="ac faq-item">
         <h3 class="ac-header">
-          <button type="button" class="ac-trigger faq-trigger">
+          <button
+            type="button"
+            class="ac-trigger faq-trigger"
+            aria-label="Розгорнути питання"
+          >
             <span class="faq-question">
               Я мрію про пухнастика! Що мені потрібно зробити, щоб забрати
               хвостика додому?
@@ -518,6 +593,7 @@
           <button
             class="swiper-button-prev animated-nav-button"
             id="swiper-button-prev"
+            aria-label="Попередній слайд відгуків"
           >
             <svg class="arrow-icon" width="20" height="20">
               <use href="/pets-team-project/assets/icons-64NDqf5V.svg#icon-arrow_back"></use>
@@ -526,6 +602,7 @@
           <button
             class="swiper-button-next animated-nav-button"
             id="swiper-button-next"
+            aria-label="Попередній слайд відгуків"
           >
             <svg class="arrow-icon" width="20" height="20">
               <use href="/pets-team-project/assets/icons-64NDqf5V.svg#icon-arrow_forward"></use>
@@ -544,15 +621,28 @@
     <div class="footer-links-wrapper">
       <ul class="footer-logo-links">
         <li class="footer-links-item">
-          <a class="footer-logo" href="index.html" aria-label="Хатинка лапок - головна сторінка">
-            <svg class="footer-logo-img" width="100" height="98" aria-hidden="true">
+          <a
+            class="footer-logo"
+            href="index.html"
+            aria-label="Хатинка лапок - головна сторінка"
+          >
+            <svg
+              class="footer-logo-img"
+              width="100"
+              height="98"
+              aria-hidden="true"
+            >
               <use href="/pets-team-project/assets/icons-64NDqf5V.svg#icon-logo"></use>
             </svg>
           </a>
         </li>
 
         <li class="footer-links-item">
-          <a class="footer-logo-text" href="index.html" aria-label="Хатинка лапок">
+          <a
+            class="footer-logo-text"
+            href="index.html"
+            aria-label="Хатинка лапок"
+          >
             <svg class="logo-text" width="183" height="71" aria-hidden="true">
               <use href="/pets-team-project/assets/icons-64NDqf5V.svg#logo-text"></use>
             </svg>
@@ -563,34 +653,83 @@
       <nav class="footer-nav" aria-label="Навігація футера">
         <ul class="footer-nav-list">
           <li class="footer-nav-item">
-            <a class="footer-nav-link" aria-disabled="true" tabindex="-1" href="#about-us">Про нас</a>
+            <a
+              class="footer-nav-link"
+              aria-disabled="true"
+              tabindex="-1"
+              href="#about-us"
+              aria-label="Секція про нас"
+              >Про нас</a
+            >
           </li>
           <li class="footer-nav-item">
-            <a class="footer-nav-link" aria-disabled="true" tabindex="-1" href="#pets-list">Знайти друга</a>
+            <a
+              class="footer-nav-link"
+              aria-disabled="true"
+              tabindex="-1"
+              href="#pets-list"
+              aria-label="Секція знайти друга"
+              >Знайти друга</a
+            >
           </li>
           <li class="footer-nav-item">
-            <a class="footer-nav-link" aria-disabled="true" tabindex="-1" href="#faq">Часті запитання</a>
+            <a
+              class="footer-nav-link"
+              aria-disabled="true"
+              tabindex="-1"
+              href="#faq"
+              aria-label="Секція часті запитання"
+              >Часті запитання</a
+            >
           </li>
           <li class="footer-nav-item">
-            <a class="footer-nav-link" aria-disabled="true" tabindex="-1" href="#success-stories">Історії
-              успіху</a>
+            <a
+              class="footer-nav-link"
+              aria-disabled="true"
+              tabindex="-1"
+              href="#success-stories"
+              aria-label="Секція історії успіху"
+              >Історії успіху</a
+            >
           </li>
         </ul>
       </nav>
 
       <ul class="footer-socials-list">
         <li class="footer-socials-item">
-          <a class="footer-socials-link" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"
-            aria-label="Facebook" title="Ми у Facebook">
-            <svg class="footer-socials-icon" width="32" height="32" aria-hidden="true">
+          <a
+            class="footer-socials-link"
+            href="https://www.facebook.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            title="Ми у Facebook"
+          >
+            <svg
+              class="footer-socials-icon"
+              width="32"
+              height="32"
+              aria-hidden="true"
+            >
               <use href="/pets-team-project/assets/icons-64NDqf5V.svg#icon-facebook"></use>
             </svg>
           </a>
         </li>
         <li class="footer-socials-item">
-          <a class="footer-socials-link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer"
-            aria-label="Instagram" title="Ми у Instagram">
-            <svg class="footer-socials-icon" width="32" height="32" aria-hidden="true">
+          <a
+            class="footer-socials-link"
+            href="https://www.instagram.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            title="Ми у Instagram"
+          >
+            <svg
+              class="footer-socials-icon"
+              width="32"
+              height="32"
+              aria-hidden="true"
+            >
               <use href="/pets-team-project/assets/icons-64NDqf5V.svg#icon-instagram"></use>
             </svg>
           </a>
@@ -599,19 +738,18 @@
     </div>
 
     <div class="copyright-wrapper">
-      <hr class="horizontal-line" aria-hidden="true">
+      <hr class="horizontal-line" aria-hidden="true" />
       <p class="footer-copyright">
         &copy; <span id="year"></span> Хатинка лапок. Всі права захищені.
       </p>
     </div>
-
   </div>
-
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+
 
     <div class="animal-details-modal visually-hidden">
   <div class="modal">
@@ -648,7 +786,9 @@
               </li>
             </ul>
             <div class="button-container">
-              <button class="button">Взяти додому</button>
+              <button class="button" aria-label="Взяти додому">
+                Взяти додому
+              </button>
             </div>
           </div>
         </div>
@@ -659,7 +799,7 @@
 
     <div class="order-modal-overlay">
   <div class="order-modal">
-    <button class="order-btn-close" type="button">
+    <button class="order-btn-close" type="button" aria-label="Закрити вікно">
       <svg width="24" height="24" class="order-icon-close">
         <use href="/pets-team-project/assets/icons-64NDqf5V.svg#icon-close"></use>
       </svg>
@@ -708,11 +848,13 @@
         <p class="order-error-text">Error text</p>
       </div>
 
-      <button type="submit" class="btn-send">Надіслати</button>
+      <button type="submit" class="btn-send" aria-label="Надіслати заявку">
+        Надіслати
+      </button>
     </form>
   </div>
 </div>
 
-    
+
   </body>
 </html>
