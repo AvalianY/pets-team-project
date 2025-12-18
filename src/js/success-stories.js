@@ -6,7 +6,7 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const loader = document.querySelector('.stories-loader');
-const controls = document.querySelector('success-stories-section .swiper-controls');
+const controls = document.querySelector('.success-stories-section .swiper-controls');
 
 export function showError(error) {
   iziToast.info({
@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (storiesList === null) {
       showError('Не вдалося завантажити історії. Спробуйте пізніше');
       hideLoader();
-      const wrapper = document.querySelector('success-stories-section .swiper-wrapper');
+      const wrapper = document.querySelector('.success-stories-section .swiper-wrapper');
       if (wrapper) {
         wrapper.innerHTML =
           '<p class="error-swiper">Не вдалося завантажити історії</p>';
@@ -53,7 +53,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     if (storiesList.length === 0) {
       showError('Нажаль, історії зараз недоступні');
       hideLoader();
-      const wrapper = document.querySelector('success-stories-section .swiper-wrapper');
+      const wrapper = document.querySelector('.success-stories-section .swiper-wrapper');
       if (wrapper) {
         wrapper.innerHTML =
           '<p class="error-swiper">Нажаль, історії зараз недоступні</p>';
@@ -70,14 +70,14 @@ window.addEventListener('DOMContentLoaded', async () => {
       spaceBetween: 32,
 
       pagination: {
-        el: 'success-stories-section .swiper-pagination',
+        el: '.success-stories-section .swiper-pagination',
         clickable: true,
         dynamicBullets: false,
       },
 
       navigation: {
-        nextEl: 'success-stories-section .swiper-button-next',
-        prevEl: 'success-stories-section .swiper-button-prev',
+        nextEl: '.success-stories-section .swiper-button-next',
+        prevEl: '.success-stories-section .swiper-button-prev',
       },
 
       breakpoints: {
@@ -91,7 +91,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     hideLoader();
   } catch (err) {
     showError('Cталась помилка. Спробуйте пізніше');
-    const wrapper = document.querySelector('success-stories-section .swiper-wrapper');
+    const wrapper = document.querySelector('.success-stories-section .swiper-wrapper');
     if (wrapper) {
       wrapper.innerHTML =
         '<p class="error-swiper">Нажаль, історії зараз недоступні</p>';
