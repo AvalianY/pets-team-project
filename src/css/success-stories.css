@@ -1,0 +1,161 @@
+.success-stories-section {
+  padding: 64px 0;
+}
+
+.success-stories-title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  max-width: 335px;
+  margin: 0 auto 24px auto;
+}
+
+.success-stories-text {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: #02060a;
+  max-width: 335px;
+  margin: 0 auto 40px auto;
+}
+
+.stars-list {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 32px;
+}
+
+.star {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper {
+  width: 100%;
+}
+
+.storie-text {
+  font-size: 18px;
+  margin: 32px 0;
+}
+
+.storie-names {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+#swiper-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  --swiper-navigation-size: 0px;
+  margin-top: 40px;
+}
+
+#swiper-pagination {
+  position: relative;
+  text-align: start;
+  justify-content: flex-start;
+  left: auto;
+  top: 4px;
+  transform: none;
+  --swiper-theme-color: var(--scheme1-text);
+}
+
+#swiper-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#swiper-button-prev,
+#swiper-button-next {
+  position: static;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.arrow-icon {
+  color: var(--scheme1-text);
+}
+
+.error-swiper {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--neutral);
+  max-width: 335px;
+  margin: 0 auto 40px auto;
+}
+
+.hide {
+  display: none;
+}
+
+.stories-loader {
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .swiper {
+    max-width: 704px;
+  }
+
+  .success-stories-title {
+    max-width: 704px;
+  }
+
+  .success-stories-text {
+    max-width: 704px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .swiper {
+    max-width: 1312px;
+  }
+
+  .success-stories-title {
+      max-width: 640px;
+      font-size: 48px;
+    }
+  
+    .success-stories-text {
+      max-width: 640px;
+      font-size: 18px;
+    }
+
+    .storie-text {
+      font-size: 20px;
+    }
+
+    .storie-names {
+      font-size: 16px;
+    }
+  
+  .success-stories-section {
+    padding: 80px 0;
+  }
+}
+
+.star-rating svg {
+  display: inline-block;
+  font-size: 20px;
+}
+
+.star-rating {
+  height: 20px;
+}
