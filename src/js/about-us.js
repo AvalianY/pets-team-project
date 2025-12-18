@@ -72,3 +72,10 @@ if (document.readyState === 'loading') {
   runInit();
 }
 
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => {
+    if (aboutUsSwiper) {
+      aboutUsSwiper.destroy(true, true);
+      aboutUsSwiper = null;
+    }
+  });
