@@ -197,17 +197,38 @@ function clearFieldError(field) {
 }
 
 refs.nameInput.addEventListener('input', () => {
+  const value = refs.nameInput.value.trim();
+
   clearFieldError(refs.nameInput);
+
+  if (value.length > 32) {
+    setFieldError(refs.nameInput, 'Максимум 32 символи');
+  }
+
   checkFormValidity();
 });
 
 refs.phoneInput.addEventListener('input', () => {
+  const phone = normalizePhone(refs.phoneInput.value);
+
   clearFieldError(refs.phoneInput);
+
+  if (phone && !/^[0-9]{12}$/.test(phone)) {
+    setFieldError(refs.phoneInput, 'Введіть коректний номер телефону');
+  }
+
   checkFormValidity();
 });
 
 refs.commentInput.addEventListener('input', () => {
+  const value = refs.commentInput.value.trim();
+
   clearFieldError(refs.commentInput);
+
+  if (value.length > 500) {
+    setFieldError(refs.commentInput, 'Максимум 500 символів');
+  }
+
   checkFormValidity();
 });
 
