@@ -9,7 +9,6 @@
   width: 100%;
   z-index: 998;
   background-color: var(--scheme1-background);
-  padding-right: 20px;
 }
 
 .header-elements {
@@ -204,9 +203,6 @@
 /* ===== TABLET ===== */
 
 @media screen and (min-width: 768px) {
-  .header {
-  padding-right: 0;
-}
   .header-mob-menu-container {
     width: 768px;
     padding: 16px 32px 32px;
