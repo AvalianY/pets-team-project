@@ -22,7 +22,7 @@
     <script type="module" crossorigin src="/pets-team-project/index.js"></script>
     <link rel="modulepreload" crossorigin href="/pets-team-project/assets/vendor-yK1sj6ZY.js">
     <link rel="stylesheet" crossorigin href="/pets-team-project/assets/vendor-BDe4lSQt.css">
-    <link rel="stylesheet" crossorigin href="/pets-team-project/assets/index-qSvTzrAc.css">
+    <link rel="stylesheet" crossorigin href="/pets-team-project/assets/index-BzKfZJ7u.css">
   </head>
   <body>
     <header class="header">
@@ -661,11 +661,62 @@
   </div>
 </div>
 
-    <div class="order-modal">
-    <div class="container">
-        <h1>Order Modal</h1>
-    </div>
+    <div class="order-modal-overlay is-open">
+  <div class="order-modal">
+    <button class="order-btn-close" type="button">
+      <svg width="24" height="24" class="order-icon-close">
+        <use href="/pets-team-project/assets/icons-64NDqf5V.svg#icon-close"></use>
+      </svg>
+    </button>
+
+    <p class="order-title">Залишіть заявку на знайомство</p>
+
+    <form class="order-form">
+      <div class="order-container-label">
+        <label class="order-label" for="user-name">Ім’я*</label>
+        <div class="order-container-input">
+          <input
+            class="order-input"
+            type="text"
+            id="user-name"
+            name="user-name"
+            placeholder="Андрій"
+          />
+        </div>
+        <p class="order-error-text">Error text</p>
+      </div>
+
+      <div class="order-container-label">
+        <label class="order-label" for="user-tel">Телефон*</label>
+        <div class="order-container-input">
+          <input
+            class="order-input"
+            type="tel"
+            id="user-tel"
+            name="user-tel"
+            placeholder="+38 (095) 555 99 22"
+          />
+        </div>
+        <p class="order-error-text">Error text</p>
+      </div>
+
+      <div class="order-container-area">
+        <label class="order-label" for="user-comment">Коментар</label>
+        <textarea
+          class="order-textarea"
+          name="user-comment"
+          id="user-comment"
+          rows="5"
+          placeholder="Напишіть ваш коментар"
+        ></textarea>
+        <p class="order-error-text">Error text</p>
+      </div>
+
+      <button type="submit" class="btn-send">Надіслати</button>
+    </form>
+  </div>
 </div>
+
     
   </body>
 </html>
