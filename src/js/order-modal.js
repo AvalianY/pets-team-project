@@ -2,6 +2,10 @@ import axios from 'axios';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
+const api = axios.create({
+  baseURL: 'https://paw-hut.b.goit.study/api',
+  });
+
 const refs = {
   overlay: document.querySelector('.order-modal-overlay'),
   modal: document.querySelector('.order-modal'),
@@ -20,7 +24,18 @@ let animalId = null;
 ========================= */
 
 window.addEventListener('open-order-modal', event => {
-  animalId = event.detail.petId;
+  const petId = event?.detail?.petId;
+
+  if (!petId) {
+    iziToast.error({
+      title: 'Помилка',
+      message: 'Не вдалося визначити тварину для заявки',
+      position: 'topRight',
+    });
+    return;
+  }
+
+  animalId = petId;
   openModal();
 });
 
@@ -29,18 +44,32 @@ window.addEventListener('open-order-modal', event => {
 ========================= */
 
 function openModal() {
+  
   refs.overlay.classList.add('is-open');
-  document.body.style.overflow = 'hidden';
+  document.documentElement.classList.add('modal-open');
+  document.body.classList.add('modal-open');
+
   refs.submitBtn.disabled = true;
   checkFormValidity();
+
   document.addEventListener('keydown', onEscPress);
 }
 
 function closeModal() {
   refs.overlay.classList.remove('is-open');
-  document.body.style.overflow = '';
+  document.documentElement.classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
+
   refs.form.reset();
+    
+  refs.submitBtn.disabled = true;
+    
+  clearFieldError(refs.nameInput);
+  clearFieldError(refs.phoneInput);
+  clearFieldError(refs.commentInput);
+
   animalId = null;
+
   document.removeEventListener('keydown', onEscPress);
 }
 
@@ -83,7 +112,7 @@ refs.form.addEventListener('submit', async event => {
   };
 
   try {
-    await axios.post('/orders', payload);
+    await api.post('/orders', payload);
 
     iziToast.success({
       title: 'Успішно',
@@ -179,6 +208,7 @@ refs.phoneInput.addEventListener('input', () => {
 
 refs.commentInput.addEventListener('input', () => {
   clearFieldError(refs.commentInput);
+  checkFormValidity();
 });
 
 /* =========================
