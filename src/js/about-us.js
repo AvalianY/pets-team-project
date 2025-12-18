@@ -7,12 +7,10 @@ import 'swiper/css';
 let aboutUsSwiper = null;
 
 function updateNavigationState(swiper) {
-  const prevBtn = Array.isArray(swiper.navigation?.prevEl)
-    ? swiper.navigation.prevEl[0]
-    : swiper.navigation?.prevEl;
-  const nextBtn = Array.isArray(swiper.navigation?.nextEl)
-    ? swiper.navigation.nextEl[0]
-    : swiper.navigation?.nextEl;
+  const prevEl = swiper?.navigation?.prevEl;
+  const nextEl = swiper?.navigation?.nextEl;
+  const prevBtn = Array.isArray(prevEl) ? prevEl[0] : prevEl;
+  const nextBtn = Array.isArray(nextEl) ? nextEl[0] : nextEl;
 
   if (prevBtn && nextBtn) {
     prevBtn.disabled = swiper.isBeginning;
@@ -20,13 +18,29 @@ function updateNavigationState(swiper) {
   }
 }
 
-
-
 function initAboutUsSwiper() {
   const container = document.querySelector(
     '.about-us-section .about-us-swiper'
   );
   if (!container) return null;
+
+  // Prevent double-initialization (e.g., HMR) which can cause double navigation calls
+  if (container.swiper) {
+    try {
+      container.swiper.destroy(true, true);
+    } catch (e) {
+      // noop
+    }
+  }
+
+  // Scope navigation/pagination to this container to avoid global selector matches
+  const controls = container.querySelector('.about-us-swiper-controls');
+  const nextBtnEl =
+    controls?.querySelector('.about-us-swiper-button-next') || null;
+  const prevBtnEl =
+    controls?.querySelector('.about-us-swiper-button-prev') || null;
+  const paginationEl =
+    controls?.querySelector('.about-us-swiper-pagination') || null;
 
   const swiper = new Swiper(container, {
     modules: [Navigation, Pagination],
@@ -34,11 +48,11 @@ function initAboutUsSwiper() {
     wrapperClass: 'about-us-swiper-wrapper',
     slideClass: 'about-us-swiper-slide',
     navigation: {
-      nextEl: '.about-us-swiper-controls .about-us-swiper-button-next',
-      prevEl: '.about-us-swiper-controls .about-us-swiper-button-prev',
+      nextEl: nextBtnEl,
+      prevEl: prevBtnEl,
     },
     pagination: {
-      el: '.about-us-swiper-controls .about-us-swiper-pagination',
+      el: paginationEl,
       clickable: true,
     },
     slidesPerView: 1,
