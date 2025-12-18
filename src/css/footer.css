@@ -5,7 +5,15 @@
   padding-top: 48px;
   padding-bottom: 48px;
   margin: 0 auto;
-  min-width: 100%;
+  width: 100%;
+}
+
+.footer-logo-img {
+  width: 100%;
+}
+
+.logo-text {
+  width: 100%;
 }
 
 .footer-container {
