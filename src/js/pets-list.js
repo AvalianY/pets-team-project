@@ -17,7 +17,6 @@ let page = 1;
 let categoryId = '';
 let petsObjArray = [];
 const petsList = document.querySelector('.pets-list');
-const animalDetailsModal = document.querySelector('.animal-details-modal');;
 const petsCategoryList = document.querySelector('.pets-category-list');
 const firstCategoryButton = document.querySelector('.pet-category-button.all');
 firstCategoryButton.classList.add('is-deactive');
@@ -50,7 +49,7 @@ if (morePetsButton) {
 }
 
 petsList?.addEventListener('click', (e) => {
-    const btn = e.target.closest('.more-pet-info');
+    const btn = e.target.closest('.pets-list-section .button-container');
     if (!btn) return;
     e.preventDefault();
 

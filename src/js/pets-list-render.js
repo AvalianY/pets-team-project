@@ -20,8 +20,8 @@ export function createPetsList(pets) {
                 <p class="pet-info age-gender"><span class="age">${pet.age}</span class="gender"><span>${pet.gender}</span></p>
                 <p class="pet-info behavior">${pet.behavior} ${pet.shortDescription}</p>
             </div>
-            <div class="button-container animated-button ligth">
-                <a class="more-pet-info" data-id="${pet._id}">Дізнатись більше</a>
+            <div class="button-container animated-button ligth" data-id="${pet._id}">
+                <p class="more-pet-info">Дізнатись більше</p>
             </div>
         </li>`
     ).join('');

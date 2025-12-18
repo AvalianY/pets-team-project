@@ -1,5 +1,4 @@
 .hero-section {
-  min-width: 330px;
   padding-top: 64px;
   padding-bottom: 115px;
   background: center / cover no-repeat;
@@ -8,6 +7,8 @@
     url('../img/hero/hero-mobile-1x.webp') 1x,
     url('../img/hero/hero-mobile-2x.webp') 2x
   );
+  min-width: 340px;
+  margin: 0 auto;
 }
 
 .hero-container {
@@ -102,6 +103,7 @@
       url('../img/hero/hero-desc-1x.webp') 1x,
       url('../img/hero/hero-desc-2x.webp') 2x
     );
+      max-width: 1440px;
   }
 
   .hero-container {

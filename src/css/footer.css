@@ -69,24 +69,6 @@
   width: 100%;
 }
 
-/* ACTIVE стан */
-.footer-nav-link.is-active {
-  transform: scale(1.1);
-  color: #88765c;
-}
-
-.footer-nav-link.is-active::after {
-  width: 100%;
-}
-
-/* DISABLED стан */
-.footer-nav-link.is-disabled {
-  color: rgba(2, 6, 10, 0.4);
-  cursor: not-allowed;
-  pointer-events: none;
-  transform: none;
-}
-
 .footer-nav-link.is-disabled::after {
   width: 0;
 }

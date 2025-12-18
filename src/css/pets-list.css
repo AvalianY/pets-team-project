@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 64px;
+    padding-bottom: 32px;
 }
 
 .section-pets-title {
@@ -9,7 +11,6 @@
     font-size: 36px;
     line-height: 1.2;
     letter-spacing: -0.01em;
-    margin-top: 64px;
 }
 
 .section-pets-p {
@@ -130,7 +131,6 @@
     min-width: 320px;
     max-width: 335px;
     height: 45px;
-    margin-bottom: 32px;
 }
 
 .is-deactive {
@@ -160,10 +160,12 @@
 }
 
 @media screen and (min-width: 1440px) {
+    .pets-list-section .container {
+        padding-top: 80px;
+    }
 
     .section-pets-title {
         font-size: 48px;
-        margin-top: 80px;
     }
     .section-pets-p{
         font-size: 18px;

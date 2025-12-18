@@ -61,6 +61,13 @@ body {
 
 main {
   flex-grow: 1;
+  padding-top: 64px;
+}
+
+@media screen and (min-width: 1440px) {
+  main {
+      padding-top: 72px;
+    }
 }
 
 .visually-hidden {
