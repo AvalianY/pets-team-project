@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     burger.classList.remove('is-hidden');
     close.classList.remove('is-active');
     document.body.style.overflow = '';
+    document.removeEventListener('keydown', handleEscKey);
   };
 
   // open mobile menu
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     burger.classList.add('is-hidden');
     close.classList.add('is-active');
     document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', handleEscKey);
   });
 
   // close button
