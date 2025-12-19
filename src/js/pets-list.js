@@ -14,12 +14,15 @@ import {
 } from "./pets-list-render.js";
 
 let page = 1;
+let totalPages = 1;
 let categoryId = '';
 let petsObjArray = [];
+const petsListNavigation = document.querySelector('.pets-list-navigation');
 const petsList = document.querySelector('.pets-list');
 const petsCategoryList = document.querySelector('.pets-category-list');
 const firstCategoryButton = document.querySelector('.pet-category-button.all'); 
 firstCategoryButton.classList.add('is-deactive');
+
 
 getCategoryByQueryMaker();
 getImagesByQueryMaker(categoryId, page);
@@ -58,6 +61,43 @@ petsList?.addEventListener('click', (e) => {
     window.dispatchEvent(new CustomEvent('open-animal-modal', {
         detail: { petId }
     }));
+});
+
+document.querySelector(".pets-list-navigation").addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+
+  if (btn.classList.contains("pets-nav-btn.back")) {
+    if (page > 1) {
+      page--;
+      loadPetsPage({ categoryId, page: - 1 });
+    }
+    return;
+  }
+
+  if (btn.classList.contains("pets-nav-btn.forward")) {
+    if (currentPage < totalPages) {
+      page++;
+      loadPetsPage({ categoryId, page });
+    }
+    return;
+  }
+
+  if (btn.classList.contains("pets-nav-button")) {
+    const page = Number(btn.textContent);
+    if (!Number.isFinite(page)) return;
+    loadPetsPage({ categoryId: currentCategoryId, page });
+  }
+});
+
+document.querySelector(".pets-category-list").addEventListener("click", (e) => {
+  const btn = e.target.closest(".pet-category-button");
+  if (!btn) return;
+
+  categoryId = btn.dataset.categoryId || "";
+  page = 1;
+
+  loadPetsPage({ categoryId, page });
 });
 
 /* Функції */
@@ -102,6 +142,46 @@ async function getImagesByQueryMaker(categoryId, page) {
     } finally {hideLoader();}
 }
 
+async function loadPetsPage({ categoryId, page } = {}) {
+  try {
+    showLoader();
+
+    const cid = categoryId;
+    const nextPage = Math.max(1, Number(page) || 1);
+
+    const data = await getImagesByQuery(cid, nextPage);
+    const animals = data?.animals || [];
+
+    categoryId = cid;
+    totalPages = Math.max(1, Math.ceil((data.totalItems || 0) / (data.limit || 1)));
+    page = Math.min(nextPage, totalPages);
+
+    clearPetsList();
+
+    if (animals.length === 0) {
+      iziToast.info({
+        message: "Тварин не знайдено за обраним фільтром.",
+        position: "topRight",
+      });
+      updatePaginationUI();
+      return;
+    }
+
+    petsObjArray = animals;
+    setPets(animals);
+    createPetsList(animals);
+
+    updatePaginationUI();
+  } catch (error) {
+    iziToast.error({
+      message: error?.message || "Сталася помилка під час завантаження тварин.",
+      position: "topRight",
+    });
+  } finally {
+    hideLoader();
+  }
+}
+
 /* Категорії */
 
 async function getCategoryByQueryMaker() {
@@ -126,6 +206,21 @@ async function getCategoryByQueryMaker() {
     });
   } finally {
   }
+}
+
+function updatePaginationUI() {
+  const prevBtn = document.querySelector('.pets-nav-btn.back');
+  const nextBtn = document.querySelector('.pets-nav-btn.forward');
+
+  if (prevBtn) prevBtn.disabled = page === 1;
+  if (nextBtn) nextBtn.disabled = page === totalPages;
+
+  document.querySelectorAll('.pets-nav-button').forEach((btn) => {
+    btn.classList.toggle(
+      'is-active',
+      Number(btn.textContent) === page
+    );
+  });
 }
 
 /* функції для передачі данних для модалки*/

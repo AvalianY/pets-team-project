@@ -139,6 +139,20 @@
     background: var(--scheme1-foreground);
 }
 
+ .pets-list-navigation {
+     display: none;
+ }
+
+ .is-deactive-nav {
+     opacity: 0.4;
+     pointer-events: none;
+     cursor: default;
+ }
+
+ .is-active-nav {
+    background-color: var(--scheme1-foreground);
+ }
+
 @media screen and (min-width: 768px) {
 
     .pets-category-list {
@@ -154,6 +168,38 @@
     .pet-list-item {
         box-sizing: border-box;
         width: calc((100% - 32px) / 2);
+    }
+
+    .more-pets-button {
+        display: none !important; 
+    }
+
+    .pets-list-navigation {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+    }
+
+    .pets-nav-btn {
+        border-radius: 8px;
+        padding: 12px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .pets-nav-button {
+        border: 1px solid var(--neutral-light);
+        border-radius: 8px;
+        padding: 12px 24px;
+        width: 57px;
+        height: 45px;
+        background-color: var(--scheme1-background);
+        font-size: 14px;
+    }
+
+    .pets-nav-dots {
+        font-weight: 500;
+        font-size: 18px;
     }
 }
 
