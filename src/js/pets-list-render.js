@@ -51,15 +51,12 @@ export function showMorePetsButton() {
 }
 
 export function scrollPetsList() {
+  requestAnimationFrame(() => {
     const firstCard = document.querySelector('.pet-list-item');
     if (!firstCard) return;
-
     const cardHeight = firstCard.getBoundingClientRect().height;
-
-    window.scrollBy({
-        top: cardHeight * 1,
-        behavior: "smooth"
-    });
+    window.scrollBy({ top: cardHeight * 1, behavior: 'smooth' });
+  });
 }
 
 /* Категорії */
