@@ -16,6 +16,7 @@ import {
 let page = 1;
 let categoryId = '';
 let petsObjArray = [];
+const petsById = new Map();
 const petsList = document.querySelector('.pets-list');
 const petsCategoryList = document.querySelector('.pets-category-list');
 const firstCategoryButton = document.querySelector('.pet-category-button.all'); 
@@ -64,42 +65,60 @@ petsList?.addEventListener('click', (e) => {
 
 /* Картки */
 async function getImagesByQueryMaker(categoryId, page) {
-    try {
-        hideMorePetsButton();
-        const data = await getImagesByQuery(categoryId, page);
+  try {
+    hideMorePetsButton();
+    showLoader();
 
-        if (data.animals.length === 0) {
-        iziToast.info({
-            message: 'Тварин не знайдено за обраним фільтром.',
-            position: 'topRight',
-        });
-        clearPetsList();
-        hideMorePetsButton();
-        return;
-        }
+    const data = await getImagesByQuery(categoryId, page);
+    const animals = data?.animals || [];
 
-        petsObjArray = data.animals;
-        setPets(petsObjArray); 
-        createPetsList(petsObjArray);
+    if (animals.length === 0) {
+      iziToast.info({
+        message: "Тварин не знайдено за обраним фільтром.",
+        position: "topRight",
+      });
+      clearPetsList();
+      return;
+    }
 
-        if (page > 1) scrollPetsList();
+    if (page === 1) {
+      petsObjArray = [];
+      petsById.clear();
+      clearPetsList();
+    }
 
-        const totalPages = Math.ceil(data.totalItems / data.limit);
+    const toRender = [];
+    for (const pet of animals) {
+      if (!petsById.has(pet._id)) {
+        petsById.set(pet._id, pet);
+        petsObjArray.push(pet);
+        toRender.push(pet); 
+      } else {
+        petsById.set(pet._id, pet);
+      }
+    }
 
-        if (page >= totalPages) {
-        hideMorePetsButton();
-        iziToast.info({
-            message: 'Ви переглянули всі доступні результати.'
-        });
-        } else {
-        showMorePetsButton();
-        }
+    setPets(petsObjArray);
+    createPetsList(toRender);
 
-    } catch (error) {
-        iziToast.error({
-        message: error?.message || 'Сталася помилка під час завантаження тварин.',
-        position: "topRight", });
-    } finally {hideLoader();}
+    if (page > 1) scrollPetsList();
+
+    const totalPages = Math.ceil((data.totalItems || 0) / (data.limit || 1));
+
+    if (page >= totalPages) {
+      hideMorePetsButton();
+      iziToast.info({ message: "Ви переглянули всі доступні результати." });
+    } else {
+      showMorePetsButton();
+    }
+  } catch (error) {
+    iziToast.error({
+      message: error?.message || "Сталася помилка під час завантаження тварин.",
+      position: "topRight",
+    });
+  } finally {
+    hideLoader();
+  }
 }
 
 /* Категорії */
