@@ -66,6 +66,9 @@ function initAboutUsSwiper() {
       },
     },
     on: {
+      init(s) {
+        updateNavigationState(s);
+      },
       slideChange() {
         updateNavigationState(swiper);
       },
