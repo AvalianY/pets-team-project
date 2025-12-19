@@ -7,14 +7,36 @@ import 'swiper/css';
 let aboutUsSwiper = null;
 
 function updateNavigationState(swiper) {
-  const prevEl = swiper?.navigation?.prevEl;
-  const nextEl = swiper?.navigation?.nextEl;
-  const prevBtn = Array.isArray(prevEl) ? prevEl[0] : prevEl;
-  const nextBtn = Array.isArray(nextEl) ? nextEl[0] : nextEl;
+  // Attempt to find prev/next buttons from provided swiper or DOM
+  // Keep this function robust in case Swiper's navigation option is not used
+  let prevBtn = null;
+  let nextBtn = null;
 
-  if (prevBtn && nextBtn) {
-    prevBtn.disabled = swiper.isBeginning;
-    nextBtn.disabled = swiper.isEnd;
+  // If Swiper exposed navigation elements, prefer them
+  const navPrev = swiper?.navigation?.prevEl;
+  const navNext = swiper?.navigation?.nextEl;
+  if (navPrev) prevBtn = Array.isArray(navPrev) ? navPrev[0] : navPrev;
+  if (navNext) nextBtn = Array.isArray(navNext) ? navNext[0] : navNext;
+
+  // If not found, try to query inside swiper root element
+  const root = swiper?.el || swiper?.$el || null;
+  if (root && root.querySelector) {
+    prevBtn = prevBtn || root.querySelector('.about-us-swiper-button-prev');
+    nextBtn = nextBtn || root.querySelector('.about-us-swiper-button-next');
+  }
+
+  // Toggle disabled state and aria/class for both buttons if present
+  if (prevBtn) {
+    const disabled = !!swiper?.isBeginning;
+    prevBtn.disabled = disabled;
+    prevBtn.classList.toggle('swiper-button-disabled', disabled);
+    prevBtn.setAttribute('aria-disabled', disabled ? 'true' : 'false');
+  }
+  if (nextBtn) {
+    const disabled = !!swiper?.isEnd;
+    nextBtn.disabled = disabled;
+    nextBtn.classList.toggle('swiper-button-disabled', disabled);
+    nextBtn.setAttribute('aria-disabled', disabled ? 'true' : 'false');
   }
 }
 
@@ -47,10 +69,8 @@ function initAboutUsSwiper() {
     loop: false,
     wrapperClass: 'about-us-swiper-wrapper',
     slideClass: 'about-us-swiper-slide',
-    navigation: {
-      nextEl: nextBtnEl,
-      prevEl: prevBtnEl,
-    },
+    // Do not let Swiper attach navigation handlers automatically —
+    // we'll wire our own handlers to avoid duplicate/stacked listeners
     pagination: {
       el: paginationEl,
       clickable: true,
@@ -67,19 +87,57 @@ function initAboutUsSwiper() {
     },
     on: {
       init(s) {
-        updateNavigationState(s);
+        updateNavigationState(s, prevBtnEl, nextBtnEl);
       },
       slideChange() {
-        updateNavigationState(swiper);
+        updateNavigationState(swiper, prevBtnEl, nextBtnEl);
       },
     },
   });
 
-  updateNavigationState(swiper);
+  // Attach single custom handlers and keep references to remove later
+  const addNavHandler = (btnEl, handlerName, fn) => {
+    if (!btnEl) return;
+    // remove previous handler if exists
+    const prev = btnEl[handlerName];
+    if (prev) {
+      try {
+        btnEl.removeEventListener('click', prev);
+      } catch (e) {
+        // noop
+      }
+    }
+    btnEl[handlerName] = fn;
+    btnEl.addEventListener('click', fn);
+  };
+
+  addNavHandler(nextBtnEl, '_aboutUsNext', (e) => {
+    e.preventDefault();
+    swiper.slideNext();
+    updateNavigationState(swiper, prevBtnEl, nextBtnEl);
+  });
+
+  addNavHandler(prevBtnEl, '_aboutUsPrev', (e) => {
+    e.preventDefault();
+    swiper.slidePrev();
+    updateNavigationState(swiper, prevBtnEl, nextBtnEl);
+  });
+
+  updateNavigationState(swiper, prevBtnEl, nextBtnEl);
   return swiper;
 }
 
 function runInit() {
+  // Destroy previous instance if present to avoid duplicate event handlers
+  if (aboutUsSwiper) {
+    try {
+      aboutUsSwiper.destroy(true, true);
+    } catch (e) {
+      // noop
+    }
+    aboutUsSwiper = null;
+  }
+
   aboutUsSwiper = initAboutUsSwiper();
 }
 
