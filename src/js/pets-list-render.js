@@ -57,7 +57,7 @@ export function scrollPetsList() {
     const cardHeight = firstCard.getBoundingClientRect().height;
 
     window.scrollBy({
-        top: cardHeight * 2,
+        top: cardHeight * 1,
         behavior: "smooth"
     });
 }
