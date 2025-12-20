@@ -10,9 +10,7 @@ import{a as $,i as u,S as X,N as se,P as re,A as ie,R as ae}from"./assets/vendor
                 <p class="pet-info age-gender"><span class="age">${n.age}</span class="gender"><span>${n.gender}</span></p>
                 <p class="pet-info behavior">${n.behavior} ${n.shortDescription}</p>
             </div>
-            <div class="button-container animated-button ligth" data-id="${n._id}">
-                <p class="more-pet-info">Дізнатись більше</p>
-            </div>
+            <button type="button" class="button-container animated-button ligth" data-id="${n._id}" arial-lebel="Дізнатись більше">Дізнатись більше</p></button>
         </li>`).join("");Y.insertAdjacentHTML("beforeend",t)}function _(){Y.innerHTML=""}function F(){ee.style.display="block"}function me(){ee.style.display="none"}function A(){M.style.display="none"}function pe(){M.style.display="block"}function fe(){requestAnimationFrame(()=>{const e=document.querySelector(".pet-list-item");if(!e)return;const t=e.getBoundingClientRect().height;window.scrollBy({top:t*1,behavior:"smooth"})})}const K=["Всі","Собаки","Коти","Кролики","Гризуни","Птахи","Тварини з особливими потребами","Терміново шукають дім"];function ye(e){const n=e.slice().sort((o,s)=>K.indexOf(o.name)-K.indexOf(s.name)).map(o=>`
             <li class="category-list-item">
                 <button class="pet-category-button animated-button dark"
