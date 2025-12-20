@@ -1,9 +1,12 @@
+.pets-list-section {
+  padding-top: 64px;
+  padding-bottom: 32px;
+}
+
 .pets-list-section .container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 64px;
-    padding-bottom: 32px;
 }
 
 .section-pets-title {
@@ -159,7 +162,7 @@
 }
 
 @media screen and (min-width: 1440px) {
-    .pets-list-section .container {
+    .pets-list-section {
         padding-top: 80px;
     }
 
