@@ -204,6 +204,7 @@
 .btn-send:disabled {
     opacity: 0.3;
     cursor: not-allowed;
+    pointer-events: none;
 }
 
 @media screen and (min-width: 768px) {
