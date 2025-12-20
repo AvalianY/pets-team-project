@@ -118,6 +118,7 @@
     margin-top: auto;
     font-size: 14px;
     color: var(--color-neutral-darkest);
+    width: 100%;
 }
 
 .more-pets-button{
