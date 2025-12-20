@@ -61,7 +61,7 @@
 }
 
 .info-container {
-    margin: 16px 0;
+    margin-top: 16px;
 }
 
 
@@ -106,7 +106,7 @@
 }
 
 .pet-info.behavior {
-    margin-top: 16px;
+    margin: 16px 0;
 }
 
 .pets-list-section .button-container {
