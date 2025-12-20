@@ -77,14 +77,6 @@ function initAboutUsSwiper() {
     },
     slidesPerView: 1,
     spaceBetween: 20,
-    breakpoints: {
-      768: {
-        slidesPerView: 1,
-      },
-      1280: {
-        slidesPerView: 1,
-      },
-    },
     on: {
       init(s) {
         updateNavigationState(s, prevBtnEl, nextBtnEl);
