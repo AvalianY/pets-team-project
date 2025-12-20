@@ -103,14 +103,9 @@
   width: 100%;
 }
 
-.horizontal-line {
-  border: 1px solid rgba(2, 6, 10, 0.15);
-  width: 100%;
-  max-width: 375px;
-  margin-bottom: 32px;
-}
-
 .footer-copyright {
+  border-top: 1px solid rgba(2, 6, 10, 0.15);
+  padding-top: 32px;
   font-family: 'IBM Plex Sans', sans-serif;
   color: #02060a;
 }
@@ -124,9 +119,6 @@
     column-gap: 32px;
   }
 
-  .horizontal-line {
-    max-width: 704px;
-  }
 }
 
 /* Desktop */
@@ -138,10 +130,6 @@
 
   .footer-nav-link {
     font-size: 14px;
-  }
-
-  .horizontal-line {
-    max-width: 1312px;
   }
 
   .footer-copyright {
