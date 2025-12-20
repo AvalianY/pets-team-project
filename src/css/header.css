@@ -12,28 +12,11 @@
 }
 
 .header-elements {
-  width: auto;    
-  margin: 0 auto;     
-  padding: 0;    
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-sizing: border-box;
 }
-
-
-@media (min-width: 768px) {
-  .header-elements {
-    padding: 0 32px;
-  }
-}
-
-@media (min-width: 1440px) {
-  .header-elements {
-    padding: 0 64px;
-  }
-}
-
 
 .header-wrap {
   display: flex;
