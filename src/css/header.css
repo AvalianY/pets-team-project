@@ -12,11 +12,28 @@
 }
 
 .header-elements {
+  max-width: 100%;
   width: 100%;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
+
+@media (min-width: 768px) {
+  .header-elements {
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .header-elements {
+    padding: 0 64px;
+  }
+}
+
 
 .header-wrap {
   display: flex;
