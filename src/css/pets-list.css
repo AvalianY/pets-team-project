@@ -116,9 +116,6 @@
     text-align: center;
     cursor: pointer;
     margin-top: auto;
-}
-
-.more-pet-info {
     font-size: 14px;
     color: var(--color-neutral-darkest);
 }
