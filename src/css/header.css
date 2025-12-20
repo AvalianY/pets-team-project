@@ -97,7 +97,6 @@
 
 .header-mob-menu-container {
   width: 100%;
-  max-width: 375px;
   margin: 0 auto;
   padding: 16px 20px 80px;
   display: flex;
@@ -107,7 +106,6 @@
 }
 
 .mobile-menu {
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 32px;
