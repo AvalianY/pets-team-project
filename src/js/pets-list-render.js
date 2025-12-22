@@ -118,7 +118,7 @@ export function renderPagination() {
     <button class="pets-nav-btn back animated-nav-button ${page === 1 ? "is-deactive-nav" : ""}"
       type="button" aria-label="Попередня сторінка" ${page === 1 ? "disabled" : ""}>
       <svg aria-hidden="true" width="24" height="24">
-        <use href="./img/icons.svg#icon-arrow_back"></use>
+        <use href="/img/icons.svg#icon-arrow_back"></use>
       </svg>
     </button>
 
@@ -143,7 +143,7 @@ export function renderPagination() {
         page === totalPages ? "disabled" : ""
       }>
       <svg aria-hidden="true" width="24" height="24">
-        <use href="./img/icons.svg#icon-arrow_forward"></use>
+        <use href="/img/icons.svg#icon-arrow_forward"></use>
       </svg>
     </button>
   `;
