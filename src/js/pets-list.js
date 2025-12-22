@@ -10,67 +10,164 @@ import {
   showMorePetsButton,
   hideMorePetsButton,
   scrollPetsList,
-  morePetsButton
+  morePetsButton,
+  renderPagination, 
+  petsListNavigation,
+  isTablet,
+  mqTablet
 } from "./pets-list-render.js";
 
-let page = 1;
-let categoryId = '';
+export let page = 1;
+export let totalPages = 1;
+let categoryId = "";
 let petsObjArray = [];
-const petsById = new Map();
-const petsList = document.querySelector('.pets-list');
-const petsCategoryList = document.querySelector('.pets-category-list');
-const firstCategoryButton = document.querySelector('.pet-category-button.all'); 
-firstCategoryButton.classList.add('is-deactive');
+const mqDesktop = window.matchMedia("(min-width: 1440px)");
+const petsList = document.querySelector(".pets-list");
+const petsCategoryList = document.querySelector(".pets-category-list");
+const firstCategoryButton = document.querySelector(".pet-category-button.all");
+if (firstCategoryButton) firstCategoryButton.classList.add("is-deactive");
 
-getCategoryByQueryMaker();
-getImagesByQueryMaker(categoryId, page);
+loadInitial();
 
-petsCategoryList.addEventListener('click', e => {
-    const button = e.target.closest('.pet-category-button');
-    if (!button) return;
-    const deactiveButton = petsCategoryList.querySelector('.pet-category-button.is-deactive');
-    if (deactiveButton) deactiveButton.classList.remove('is-deactive');
-    button.classList.add('is-deactive');
-    categoryId = button.dataset.categoryId || '';
-    page = 1;
+/* івенти */
+mqDesktop.addEventListener("change", () => {
+  rerenderPetsList();
+});
+
+petsCategoryList?.addEventListener("click", (e) => {
+  const button = e.target.closest(".pet-category-button");
+  if (!button) return;
+
+  const deactiveButton = petsCategoryList.querySelector(
+    ".pet-category-button.is-deactive"
+  );
+  if (deactiveButton) deactiveButton.classList.remove("is-deactive");
+  button.classList.add("is-deactive");
+
+  categoryId = button.dataset.categoryId || "";
+  page = 1;
+
+  if (!isTablet()) petsObjArray = [];
+  clearPetsList();
+  hideMorePetsButton();
+  showLoader();
+
+  if (isTablet()) {
+    loadPetsPage({ categoryId, page: 1 });
+  } else {
+    getImagesByQueryMaker(categoryId, 1);
+  }
+});
+
+morePetsButton?.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (isTablet()) return;
+
     hideMorePetsButton();
+    showLoader();
+    page += 1;
+    getImagesByQueryMaker(categoryId, page);
+  });
+
+petsList?.addEventListener("click", (e) => {
+  const btn = e.target.closest(".pets-list-section .button-container");
+  if (!btn) return;
+  e.preventDefault();
+
+  const petId = btn.dataset.id;
+  window.dispatchEvent(
+    new CustomEvent("open-animal-modal", {
+      detail: { petId },
+    })
+  );
+});
+
+petsListNavigation?.addEventListener("click", (e) => {
+  if (!isTablet()) return;
+
+  const btn = e.target.closest("button");
+  if (!btn) return;
+
+  if (btn.classList.contains("back")) {
+    if (page > 1) loadPetsPage({ categoryId, page: page - 1 });
+    return;
+  }
+
+  if (btn.classList.contains("forward")) {
+    if (page < totalPages) loadPetsPage({ categoryId, page: page + 1 });
+    return;
+  }
+
+  if (btn.classList.contains("pets-nav-button")) {
+    const targetPage = Number(btn.textContent.trim());
+    if (!Number.isFinite(targetPage)) return;
+    loadPetsPage({ categoryId, page: targetPage });
+  }
+});
+
+mqTablet.addEventListener("change", () => {
+  syncNavigationMode();
+
+  if (isTablet()) {
+    loadPetsPage({ categoryId, page });
+  } else {
+    page = 1;
+    petsObjArray = [];
     clearPetsList();
     showLoader();
     getImagesByQueryMaker(categoryId, page);
+  }
 });
 
-if (morePetsButton) {
-  morePetsButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    hideMorePetsButton();
-    showLoader();
-    page++;
-    getImagesByQueryMaker(categoryId, page);
-  });
+/* функції виконання головної логіки */
+function loadInitial() {
+  syncNavigationMode();
+  showLoader();
+
+  if (isTablet()) {
+     getCategoryByQueryMaker()
+    loadPetsPage({ categoryId, page: 1 });
+  } else {
+    petsObjArray = [];
+    getCategoryByQueryMaker()
+    getImagesByQueryMaker(categoryId, 1);
+  }
 }
 
-petsList?.addEventListener('click', (e) => {
-    const btn = e.target.closest('.pets-list-section .button-container');
-    if (!btn) return;
-    e.preventDefault();
-
-    const petId = btn.dataset.id;
-
-    window.dispatchEvent(new CustomEvent('open-animal-modal', {
-        detail: { petId }
-    }));
-});
-
-/* Функції */
-
-/* Картки */
-async function getImagesByQueryMaker(categoryId, page) {
+async function getCategoryByQueryMaker() {
   try {
-    hideMorePetsButton();
-    showLoader();
+    const data = await getCategoryByQuery();
 
-    const data = await getImagesByQuery(categoryId, page);
+    if (!Array.isArray(data) || data.length === 0) {
+      iziToast.info({
+        message: "Категорії не знайдено.",
+        position: "topRight",
+      });
+      return;
+    }
+
+    createCategoryList(data);
+  } catch (error) {
+    iziToast.error({
+      message: error?.message || "Сталася помилка під час завантаження категорій.",
+      position: "topRight",
+    });
+  }
+}
+
+async function getImagesByQueryMaker(cid, pageArg) {
+  try {
+    setPaginationLoading(true); 
+    hideMorePetsButton();
+
+    const data = await getImagesByQuery(cid, pageArg);
     const animals = data?.animals || [];
+    const limit = data?.limit || 1;
+    const totalItems = data?.totalItems || 0;
+
+    totalPages = Math.max(1, Math.ceil(totalItems / limit));
+    page = Math.min(pageArg, totalPages);
+    categoryId = cid;
 
     if (animals.length === 0) {
       iziToast.info({
@@ -78,38 +175,39 @@ async function getImagesByQueryMaker(categoryId, page) {
         position: "topRight",
       });
       clearPetsList();
+      hideMorePetsButton();
+      if (petsListNavigation) petsListNavigation.hidden = true;
       return;
     }
 
-    if (page === 1) {
-      petsObjArray = [];
-      petsById.clear();
-      clearPetsList();
-    }
-
-    const toRender = [];
-    for (const pet of animals) {
-      if (!petsById.has(pet._id)) {
-        petsById.set(pet._id, pet);
-        petsObjArray.push(pet);
-        toRender.push(pet); 
-      } else {
-        petsById.set(pet._id, pet);
-      }
-    }
-
-    setPets(petsObjArray);
-    createPetsList(toRender);
-
-    if (page > 1) scrollPetsList();
-
-    const totalPages = Math.ceil((data.totalItems || 0) / (data.limit || 1));
-
-    if (page >= totalPages) {
-      hideMorePetsButton();
-      iziToast.info({ message: "Ви переглянули всі доступні результати." });
+    if (!isTablet()) {
+      petsObjArray = mergePets(petsObjArray, animals);
+      setPets(petsObjArray);
     } else {
-      showMorePetsButton();
+      petsObjArray = animals;
+      setPets(animals);
+    }
+
+    createPetsList(animals);
+
+    if (pageArg === 1) {
+      scrollToPetsSection();
+    } else {
+      scrollPetsList();
+    }
+
+    if (!isTablet()) {
+      if (petsListNavigation) petsListNavigation.hidden = true;
+
+      if (page >= totalPages) {
+        hideMorePetsButton();
+        iziToast.info({ message: "Ви переглянули всі доступні результати." });
+      } else {
+        showMorePetsButton();
+      }
+    } else {
+      hideMorePetsButton();
+      renderPagination();
     }
   } catch (error) {
     iziToast.error({
@@ -118,37 +216,116 @@ async function getImagesByQueryMaker(categoryId, page) {
     });
   } finally {
     hideLoader();
+    setPaginationLoading(false);
   }
 }
 
-/* Категорії */
-
-async function getCategoryByQueryMaker() {
+async function loadPetsPage({ categoryId: cid = "", page: next = 1 } = {}) {
   try {
-    const data = await getCategoryByQuery();
+    setPaginationLoading(true); // ховаємо панель на час завантаження
 
-    if (!Array.isArray(data) || data.length === 0) {
+    const nextPage = Math.max(1, Number(next) || 1);
+
+    const data = await getImagesByQuery(cid, nextPage);
+    const animals = data?.animals || [];
+    const limit = data?.limit || 1;
+    const totalItems = data?.totalItems || 0;
+
+    categoryId = cid;
+    totalPages = Math.max(1, Math.ceil(totalItems / limit));
+    page = Math.min(nextPage, totalPages);
+
+    clearPetsList();
+
+    if (animals.length === 0) {
       iziToast.info({
-        message: 'Категорії не знайдено.',
+        message: "Тварин не знайдено за обраним фільтром.",
         position: "topRight",
       });
+      renderPagination();
       return;
     }
 
-    petsObjArray = data; 
-    createCategoryList(petsObjArray);
+    petsObjArray = animals;
+    setPets(animals);
+    createPetsList(animals);
+    scrollToPetsSection();
 
+    renderPagination();
   } catch (error) {
     iziToast.error({
-      message: error?.message || 'Сталася помилка під час завантаження категорій.',
+      message: error?.message || "Сталася помилка під час завантаження тварин.",
       position: "topRight",
     });
   } finally {
+    hideLoader();
+    setPaginationLoading(false);
   }
 }
 
-/* функції для передачі данних для модалки*/
+function rerenderPetsList() {
+  page = 1;
+  totalPages = 1;
 
+  if (!isTablet()) {
+    petsObjArray = [];
+  }
+
+  clearPetsList();
+  showLoader();
+
+  if (isTablet()) {
+    loadPetsPage({ categoryId, page: 1 });
+  } else {
+    getImagesByQueryMaker(categoryId, 1);
+  }
+}
+
+function scrollToPetsSection() {
+  const section =
+    document.querySelector(".pets-list-section") ||
+    document.querySelector(".pets-list") ||
+    petsList;
+
+  if (!section) return;
+
+  const yOffset = -50; // під фіксований хедер (за потреби підкрути)
+  const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+  window.scrollTo({ top: y, behavior: "smooth" });
+}
+
+function setPaginationLoading(isLoading) {
+  if (!petsListNavigation) return;
+
+  if (!isTablet()) {
+    petsListNavigation.hidden = true;
+    return;
+  }
+
+  petsListNavigation.hidden = !!isLoading;
+}
+
+function mergePets(existing, incoming) {
+  const map = new Map();
+  (existing || []).forEach((p) => p && p._id && map.set(p._id, p));
+  (incoming || []).forEach((p) => p && p._id && map.set(p._id, p));
+  return Array.from(map.values());
+}
+
+function syncNavigationMode() {
+  if (!petsListNavigation) return;
+
+  if (isTablet()) {
+    hideMorePetsButton();
+    petsListNavigation.hidden = false;
+    renderPagination();
+  } else {
+    petsListNavigation.hidden = true;
+  }
+}
+
+/* функції для модалки "дізнатись більше" */
 function setPets(data) {
   petsObjArray = Array.isArray(data) ? data : [];
 }
@@ -158,5 +335,5 @@ export function getPets() {
 }
 
 export function getPetById(id) {
-  return petsObjArray.find(p => p._id === id);
+  return petsObjArray.find((p) => p._id === id);
 }
