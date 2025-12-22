@@ -49,6 +49,8 @@
     border-radius: 16px;
     padding: 12px;
     background-color: var(--scheme1-foreground);
+    display: flex;
+    flex-direction: column;
 }
 
 .pet-image {
