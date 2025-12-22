@@ -196,14 +196,9 @@ async function getImagesByQueryMaker(cid, pageArg) {
       setPets(animals);
     }
 
-
     createPetsList(animals);
 
-    if (pageArg === 1) {
-      scrollToPetsSection();
-    } else {
-      scrollPetsList();
-    }
+    if (pageArg > 1) scrollPetsList();
 
     if (!isTablet()) {
       if (petsListNavigation) petsListNavigation.hidden = true;
