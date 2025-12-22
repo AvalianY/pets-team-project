@@ -51,6 +51,7 @@
     background-color: var(--scheme1-foreground);
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .pet-image {
