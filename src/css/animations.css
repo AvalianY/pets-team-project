@@ -73,14 +73,14 @@
 }
 
 .animated-button.dark:hover,
-.animated-button.dark:focus {
-  transform: translateY(2px);
+.animated-button.dark:focus-visible {
   background-color: var(--scheme1-foreground);
+  border-color: var(--scheme2-foreground);
+  color: var(--scheme1-text);
 }
 
 .animated-button.ligth:hover,
-.animated-button.ligth:focus {
-  transform: translateY(2px);
+.animated-button.ligth:focus-visible {
   background-color: var(--scheme2-background);
 }
 
@@ -103,7 +103,7 @@
 }
 
 .animated-nav-button:hover,
-.animated-nav-button:focus {
+.animated-nav-button:focus-visible {
   border: 1px solid rgba(2, 6, 10, 0.6);
 }
 

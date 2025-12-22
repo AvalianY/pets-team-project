@@ -1,4 +1,5 @@
 // Import page modules so they run when the app loads
+import "modern-normalize/modern-normalize.css";
 import './js/header.js';
 import './js/hero.js';
 import './js/pets-list.js';

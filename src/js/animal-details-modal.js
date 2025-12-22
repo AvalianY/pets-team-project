@@ -28,16 +28,24 @@ function getModalImage() {
 
 let currentPetId = null;
 
+function onEscKey(e) {
+  if (e.key === 'Escape' && !modal?.classList.contains('visually-hidden')) {
+    closeModal();
+  }
+}
+
 function openModal() {
   modal?.classList.remove('visually-hidden');
   document.body.classList.add('lock-scroll');
   document.documentElement.classList.add('lock-scroll');
+  document.addEventListener('keydown', onEscKey);
 }
 
 function closeModal() {
   modal?.classList.add('visually-hidden');
   document.body.classList.remove('lock-scroll');
   document.documentElement.classList.remove('lock-scroll');
+  document.removeEventListener('keydown', onEscKey);
 
   const imageEl = getModalImage();
   if (imageEl) {
@@ -112,12 +120,6 @@ closeBtn?.addEventListener('click', closeModal);
 
 modal?.addEventListener('click', e => {
   if (e.target === modal) {
-    closeModal();
-  }
-});
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && !modal?.classList.contains('visually-hidden')) {
     closeModal();
   }
 });
