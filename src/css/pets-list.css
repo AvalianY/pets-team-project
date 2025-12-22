@@ -274,4 +274,9 @@
     .pet-info.category .category {
         font-size: 12px;
     }
+
+    .pets-list-section .button-container {
+      font-size: 16px;
+
+    }
 }
