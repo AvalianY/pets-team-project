@@ -188,6 +188,15 @@ async function getImagesByQueryMaker(cid, pageArg) {
       return;
     }
 
+    if (!isTablet()) {
+      petsObjArray = mergePets(petsObjArray, animals);
+      setPets(petsObjArray);
+    } else {
+      petsObjArray = animals;
+      setPets(animals);
+    }
+
+
     createPetsList(animals);
 
     if (pageArg === 1) {
