@@ -82,26 +82,34 @@ petsList?.addEventListener("click", (e) => {
   );
 });
 
-petsListNavigation?.addEventListener("click", (e) => {
+petsListNavigation?.addEventListener("click", async (e) => {
   if (!isTablet()) return;
 
   const btn = e.target.closest("button");
   if (!btn) return;
 
   if (btn.classList.contains("back")) {
-    if (page > 1) loadPetsPage({ categoryId, page: page - 1 });
+    if (page > 1) {
+      await loadPetsPage({ categoryId, page: page - 1 });
+      scrollToPetsSection();
+    }
     return;
   }
 
   if (btn.classList.contains("forward")) {
-    if (page < totalPages) loadPetsPage({ categoryId, page: page + 1 });
+    if (page < totalPages) {
+      await loadPetsPage({ categoryId, page: page + 1 });
+      scrollToPetsSection();
+    }
     return;
   }
 
   if (btn.classList.contains("pets-nav-button")) {
     const targetPage = Number(btn.textContent.trim());
     if (!Number.isFinite(targetPage)) return;
-    loadPetsPage({ categoryId, page: targetPage });
+
+    await loadPetsPage({ categoryId, page: targetPage });
+    scrollToPetsSection();
   }
 });
 
@@ -180,14 +188,6 @@ async function getImagesByQueryMaker(cid, pageArg) {
       return;
     }
 
-    if (!isTablet()) {
-      petsObjArray = mergePets(petsObjArray, animals);
-      setPets(petsObjArray);
-    } else {
-      petsObjArray = animals;
-      setPets(animals);
-    }
-
     createPetsList(animals);
 
     if (pageArg === 1) {
@@ -222,8 +222,8 @@ async function getImagesByQueryMaker(cid, pageArg) {
 
 async function loadPetsPage({ categoryId: cid = "", page: next = 1 } = {}) {
   try {
-    setPaginationLoading(true); // ховаємо панель на час завантаження
-
+    setPaginationLoading(true);
+    
     const nextPage = Math.max(1, Number(next) || 1);
 
     const data = await getImagesByQuery(cid, nextPage);
@@ -249,7 +249,6 @@ async function loadPetsPage({ categoryId: cid = "", page: next = 1 } = {}) {
     petsObjArray = animals;
     setPets(animals);
     createPetsList(animals);
-    scrollToPetsSection();
 
     renderPagination();
   } catch (error) {
@@ -289,7 +288,7 @@ function scrollToPetsSection() {
 
   if (!section) return;
 
-  const yOffset = -50; // під фіксований хедер (за потреби підкрути)
+  const yOffset = -50;
   const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
   window.scrollTo({ top: y, behavior: "smooth" });

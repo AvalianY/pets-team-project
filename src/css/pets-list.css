@@ -208,6 +208,12 @@
         font-weight: 500;
         font-size: 18px;
     }
+
+    .pets-nav-button.is-active {
+        background-color: var(--scheme1-foreground);
+        border-color: var(--neutral-darkest);
+        font-weight: 600;
+    }
 }
 
 
