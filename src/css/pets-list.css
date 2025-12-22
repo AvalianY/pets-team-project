@@ -276,7 +276,10 @@
     }
 
     .pets-list-section .button-container {
-      font-size: 16px;
+        font-size: 16px;
+    }
 
+    .pets-list-section .pets-nav-button {
+        font-size: 16px;
     }
 }
