@@ -121,6 +121,7 @@
     color: var(--neutral-darkest);
     width: 100%;
     background: var(--scheme1-foreground);
+    margin-top: auto;
 }
 
 .more-pets-button {
