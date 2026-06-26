@@ -1,69 +1,102 @@
-# 🐾 Хатинка Лапок
+# Paw Hut / Хатинка Лапок ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 
-![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+[Українська](README.ua.md) | [English](README.en.md)
 
-> **Хатинка Лапок** — сучасний веб-портал притулку для тварин, створений для
-> того, щоб допомогти кожному пухнастику знайти свою люблячу родину.
+> **Paw Hut** ist eine responsive Teamprojekt-Website für ein Tierheim. Die Website hilft Nutzern, Tiere zur Adoption zu finden, detaillierte Tierprofile anzusehen, mehr über das Tierheim zu erfahren und eine Anfrage zur Adoption zu senden.
 
-## 📖 Зміст
+## Inhalt
 
-- [Про проект](#🐶-про-проект)
-- [Функціонал](#✨-функціонал)
-- [Технологічний стек](#🛠-технологічний-стек)
-- [Встановлення та запуск](#🚀-встановлення-та-запуск)
+- [Über das Projekt](#-über-das-projekt)
+- [Meine Rolle im Team](#-meine-rolle-im-team)
+- [Funktionalität](#-funktionalität)
+- [Technologiestack](#-technologiestack)
+- [Installation und Start](#-installation-und-start)
 
-## 🐶 Про проект
+## Über das Projekt
 
-Веб-сайт вирішує важливу соціальну проблему — спрощує процес усиновлення тварин.
-Користувачі можуть:
+**Paw Hut** ist ein teamorientiertes Lernprojekt im Frontend-Bereich. Ziel war es, eine moderne, responsive und benutzerfreundliche Website für ein Tierheim zu erstellen.
 
-- Познайомитися з мешканцями притулку онлайн.
-- Дізнатися про їхні особливості та характер.
-- Зробити перший крок до того, щоб забрати тварину додому.
+Nutzer können:
 
-Мета проекту — зробити пошук нового друга максимально простим, прозорим та
-приємним.
+- Tiere zur Adoption durchsuchen.
+- Tiere nach Kategorien filtern.
+- Detaillierte Informationen zu einem Tier in einem Modalfenster ansehen.
+- Antworten auf häufige Fragen lesen.
+- Erfolgsgeschichten ansehen.
+- Eine Adoptionsanfrage über ein Formular senden.
 
-## ✨ Функціонал
+## Meine Rolle im Team
 
-- **Інтерактивна галерея:** перегляд усіх тварин у притулку.
-- **Детальні профілі:** картки з фотографіями, описом, історією та
-  характеристиками тварини.
-- **Історія притулку:** короткі історії з фотографіями; використовується
-  `Swiper` для перегляду.
-- **Відгуки та рейтинг:** система відгуків і візуалізація рейтингу за допомогою
-  `raty-js`.
-- **Онлайн-адопція:** форма зворотного зв’язку для подачі заявки на усиновлення.
-- **Зручний UI/UX:** акордеони для компактного подання інформації та модальні
-  вікна через `SweetAlert2`.
+In diesem Teamprojekt war ich **Team Lead** und verantwortlich für die Sektion **“Our Pets” / “Наші хвостики”**.
 
-## 🛠 Технологічний стек
+Mein Beitrag umfasste:
+
+- Koordination des Team-Workflows und Organisation des Entwicklungsprozesses.
+- Entwicklung der Sektion **Our Pets / Наші хвостики**.
+- Integration externer API-Daten mit Axios.
+- Dynamisches Rendering von Tierkarten.
+- Umsetzung der Filterung nach Kategorien.
+- Umsetzung der Pagination / “Show more”-Logik.
+- Verarbeitung von Ladezuständen und API-Fehlern.
+- Verbindung der Tierkarten mit einem Detail-Modalfenster.
+
+## ✨ Funktionalität
+
+- **Responsive Layout:** optimierte Darstellung für Mobile, Tablet und Desktop.
+- **Dynamische Tierliste:** Tierkarten werden aus API-Daten gerendert.
+- **Kategorie-Filterung:** Nutzer können Tiere nach Kategorien filtern.
+- **Pagination / Show more:** schrittweises Nachladen weiterer Karten.
+- **Tierdetails:** Modalfenster mit detaillierten Informationen zu einem Tier.
+- **FAQ-Sektion:** häufig gestellte Fragen in Accordion-Form.
+- **Success Stories:** Bereich mit Geschichten erfolgreicher Adoptionen.
+- **Adoptionsformular:** Formular zur Kontaktaufnahme.
+- **Benachrichtigungen:** Nutzerfeedback und Fehlerbehandlung.
+
+## Technologiestack
 
 - **Core:** HTML5, CSS3, JavaScript (ES6+)
-- **Bundler:** [Vite](https://vitejs.dev/)
-- **Бібліотеки:**
-  - [Axios](https://axios-http.com/) — HTTP-запити
-  - [Swiper](https://swiperjs.com/) — слайдери та каруселі
-  - [Accordion-js](https://github.com/michu2k/Accordion) — розгортання блоків
-  - [Raty-js](https://github.com/wbotelhos/raty) — система рейтингів
-  - [SweetAlert2](https://sweetalert2.github.io/) — спливаючі вікна
-  - [Swagger](https://swagger.io/) — документація API
-  - [SimpleLightbox](https://simplelightbox.com/) — легка галерея з лайтбоксом
-  - [iziToast](https://izitoast.marcelodolza.com/) — сповіщення
+- **Bundler:** Vite
+- **API:** REST API, Axios
+- **Deployment:** GitHub Pages
+- **Bibliotheken und Tools:** Swiper, Accordion-js, Raty-js, SweetAlert2, SimpleLightbox, iziToast
 
-## 🚀 Встановлення та запуск
+## Installation und Start
 
-### Передумови
+### Voraussetzungen
 
-- Встановлений [Node.js](https://nodejs.org/) (версія 14 або вище).
+- Installierte aktuelle LTS-Version von [Node.js](https://nodejs.org/).
 
-### Кроки
+### Schritte
 
-1. **Клонуйте репозиторій:** git clone
-2. **Встановіть залежності (NPM):** npm install
-3. **Запустіть проект у режимі розробки:** npm run dev
-4. **Відкрийте посилання, яке з'явиться у терміналі** (зазвичай
-   http://localhost:5173/).
+1. **Repository klonen:**
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. **Abhängigkeiten installieren:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Projekt im Entwicklungsmodus starten:**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Öffnen Sie den Link, der im Terminal erscheint**  
+   normalerweise `http://localhost:5173/`.
+
+### Projekt bauen
+
+```bash
+npm run build
+```
+
+### Production-Build ansehen
+
+```bash
+npm run preview
+```
